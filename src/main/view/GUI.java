@@ -24,7 +24,7 @@ public class GUI extends JFrame{
 		//Luodaan sisältö paneeli johon voidaan lisätä tavaraa
 		Container contentPane = new Container();
 		
-		setResizable(false);
+		setResizable(true);
 		setMinimumSize(new Dimension(300,300));
 		setContentPane(contentPane);
 		
