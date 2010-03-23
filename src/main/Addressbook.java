@@ -1,5 +1,7 @@
 package main;
 
+import main.view.GUI;
+
 /**
  * Main class.
  *
@@ -7,7 +9,12 @@ package main;
 public class Addressbook {
 
 	public static void main(String[] args) {
-		System.out.println("This is addressbook!");
-	}
+
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new GUI();
+	            }
+	        });
+	    }
 
 }
