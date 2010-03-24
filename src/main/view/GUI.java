@@ -4,6 +4,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  * 
@@ -17,12 +21,19 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class GUI extends JFrame{
 	
+	private JTable contactInfoTable;
+	private ContactInfoTableModel tableModel;
+	
 	public GUI() {
 		setTitle("Addressbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Luodaan sisältö paneeli johon voidaan lisätä tavaraa
-		Container contentPane = new Container();
+		JPanel contentPane = new JPanel();
+		
+		//Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
+		JScrollPane scrollPane = new JScrollPane(initContactInfoTable());
+		contentPane.add(scrollPane);
 		
 		setResizable(true);
 		setMinimumSize(new Dimension(300,300));
@@ -31,6 +42,12 @@ public class GUI extends JFrame{
 		pack();
 		setVisible(true);
 		
+	}
+	
+	public JTable initContactInfoTable(){
+		tableModel = new ContactInfoTableModel();
+		contactInfoTable = new JTable(tableModel);
+		return contactInfoTable;
 	}
 
 }
