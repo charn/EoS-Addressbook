@@ -1,10 +1,8 @@
 package main.view;
 
-import java.awt.Container;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,7 +17,7 @@ import javax.swing.JTable;
  *
  */
 @SuppressWarnings("serial")
-public class GUI extends JFrame{
+public class GUI extends JFrame {
 	
 	private JTable contactInfoTable;
 	private ContactInfoTableModel tableModel;
@@ -29,7 +27,7 @@ public class GUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Luodaan sisältö paneeli johon voidaan lisätä tavaraa
-		JPanel contentPane = new JPanel();
+		JPanel contentPane = new JPanel(new BorderLayout());
 		
 		//Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
 		JScrollPane scrollPane = new JScrollPane(initContactInfoTable());
