@@ -38,7 +38,11 @@ public class GUI extends JFrame{
 		setResizable(true);
 		setMinimumSize(new Dimension(300,300));
 		setContentPane(contentPane);
-		
+		//
+		// Set our main menu
+		// 
+	    setJMenuBar(new MainMenuBar(this));
+	    
 		pack();
 		setVisible(true);
 		
