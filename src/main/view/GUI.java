@@ -16,8 +16,10 @@ import javax.swing.JTable;
  * @author mtnauha
  *
  */
-@SuppressWarnings("serial")
+
 public class GUI extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private JTable contactInfoTable;
 	private ContactInfoTableModel tableModel;

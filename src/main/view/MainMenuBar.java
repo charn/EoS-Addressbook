@@ -15,9 +15,13 @@ import javax.swing.JMenuItem;
  * @author toittine
  *
  */
+
 public class MainMenuBar extends JMenuBar
 {
-	  JFrame parent = null;
+	
+	private static final long serialVersionUID = 1L;
+	
+	JFrame parent = null;
  	  String[] fileItems = new String[] { "New", "Open", "Save", "Exit" };
 	  String[] editItems = new String[] { "Undo", "Cut", "Copy", "Paste" };
 	  char[] fileShortcuts = { 'N', 'O', 'S', 'X' };
