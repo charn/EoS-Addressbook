@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import main.model.AddressbookModel;
+
 /**
  * 
  * Luokka graafisen käyttöliittymän(GUI) luomiseen.
@@ -49,7 +51,7 @@ public class GUI extends JFrame {
 	}
 	
 	public JTable initContactInfoTable(){
-		tableModel = new ContactInfoTableModel();
+		tableModel = new ContactInfoTableModel(new AddressbookModel()); //new AddressbookModel() pitää korvata varsinaisella modelilla 
 		contactInfoTable = new JTable(tableModel);
 		return contactInfoTable;
 	}

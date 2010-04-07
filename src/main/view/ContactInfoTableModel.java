@@ -2,6 +2,8 @@ package main.view;
 
 import javax.swing.table.AbstractTableModel;
 
+import main.model.AddressbookModel;
+
 /**
  * 
  * Käyttöliittymän yhteystietotaulun ja varsinaisen yhteystietodatan välissä oleva malli.
@@ -13,15 +15,19 @@ import javax.swing.table.AbstractTableModel;
 public class ContactInfoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
-	
+	private AddressbookModel addressbookModel;
 	private String[] columnNames = {"First name",
 									"Last name",
 									"Email",
 									"Phone number",
 									"Address"};
 	
+	public ContactInfoTableModel(AddressbookModel model){
+		this.addressbookModel = model; 
+	}
+	
 	public int getRowCount() {
-		return 1; //TODO
+		return addressbookModel.itemAmount() + 1;
 	}
 	
 	public int getColumnCount() {

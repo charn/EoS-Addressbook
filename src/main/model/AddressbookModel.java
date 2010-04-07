@@ -46,4 +46,8 @@ public class AddressbookModel {
 	public boolean isEmpty(){
 		return items.isEmpty();
 	}
+	
+	public int itemAmount(){
+		return items.size();
+	}
 }
