@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import main.controller.*;
 import main.model.*;
 
-import static test.controller.TestDummies.*;
+import static test.TestDummies.*;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package test.controller;
+package test;
 
 import main.model.AddressbookItem;
 

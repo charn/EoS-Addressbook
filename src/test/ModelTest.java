@@ -7,6 +7,8 @@ import junit.framework.TestCase;
 import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 
+import static test.TestDummies.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,21 +29,9 @@ public class ModelTest extends TestCase{
 	
 	@Test
 	public void testAddItems(){
-		AddressbookItem item1 = new AddressbookItem("Matti",
-													"Meikäläinen",
-													"masa@gmail.com",
-													"050 123456",
-													"Mannerheimintie 10 A 4");
-		AddressbookItem item2 = new AddressbookItem("Maija",
-													"Meikäläinen",
-													"maija@gmail.com",
-													"050 445533",
-													"Mannerheimintie 10 A 4");
-		AddressbookItem item3 = new AddressbookItem("Pekka",
-													"Virtanen",
-													"pvirtanen@gmail.com",
-													"040 234234",
-													"Kitarakuja 7 A 5");
+		AddressbookItem item1 = ESA;
+		AddressbookItem item2 = JORMA;
+		AddressbookItem item3 = PETTERI;
 		model.add(item1);
 		model.add(item2);
 		model.add(item3);
@@ -56,21 +46,10 @@ public class ModelTest extends TestCase{
 	
 	@Test
 	public void testRemoveItems(){
-		AddressbookItem item1 = new AddressbookItem("Matti",
-													"Meikäläinen",
-													"masa@gmail.com",
-													"050 123456",
-													"Mannerheimintie 10 A 4");
-		AddressbookItem item2 = new AddressbookItem("Maija",
-													"Meikäläinen",
-													"maija@gmail.com",
-													"050 445533",
-													"Mannerheimintie 10 A 4");
-		AddressbookItem item3 = new AddressbookItem("Pekka",
-													"Virtanen",
-													"pvirtanen@gmail.com",
-													"040 234234",
-													"Kitarakuja 7 A 5");
+		AddressbookItem item1 = ESA;
+		AddressbookItem item2 = JORMA;
+		AddressbookItem item3 = PETTERI;
+		
 		model.add(item1);
 		model.add(item2);
 		model.add(item3);
