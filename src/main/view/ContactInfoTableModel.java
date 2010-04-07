@@ -23,9 +23,14 @@ public class ContactInfoTableModel extends AbstractTableModel {
 									"Phone number",
 									"Address"};
 	
-	public ContactInfoTableModel(AddressbookModel model){
-		this.addressbookModel = model; 
+	
+	public ContactInfoTableModel() {
+		this.addressbookModel = new AddressbookModel();
 	}
+	
+//	public ContactInfoTableModel(AddressbookModel model){
+//		this.addressbookModel = model; 
+//	}
 	
 	public void updateAddressbook(AddressbookModel model) {
 		this.addressbookModel = model;

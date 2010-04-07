@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import main.controller.AddressbookController;
 import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 
@@ -27,7 +28,12 @@ public class GUI extends JFrame implements AddressbookView {
 	private JTable contactInfoTable;
 	private ContactInfoTableModel tableModel;
 	
-	public GUI() {
+	private AddressbookController controller;
+	
+	public GUI(AddressbookController controller) {
+		
+		this.controller = controller;
+		
 		setTitle("Addressbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,30 +51,11 @@ public class GUI extends JFrame implements AddressbookView {
 		// Set our main menu
 		// 
 	    setJMenuBar(new MainMenuBar(this));
-	    
-		pack();
-		setVisible(true);
 		
 	}
 	
 	public JTable initContactInfoTable(){
-		//Jouduin laittamaan tähän rumasti testidataa /////////
-		AddressbookModel test = new AddressbookModel();
-		AddressbookItem item = new AddressbookItem("Matti",
-				"Meikäläinen",
-				"masa@gmail.com",
-				"050 123456",
-				"Mannerheimintie 10 A 4");
-		test.add(item);
-		AddressbookItem item2 = new AddressbookItem("Pekka",
-				"Virtanen",
-				"pvirtanen@gmail.com",
-				"040 234234",
-				"Kitarakuja 7 A 5");
-		test.add(item2);
-		/////////// testidata loppuu //////////////////
-		
-		tableModel = new ContactInfoTableModel(test); //test pitää korvata varsinaisella modelilla 
+		tableModel = new ContactInfoTableModel();
 		contactInfoTable = new JTable(tableModel);
 		return contactInfoTable;
 	}

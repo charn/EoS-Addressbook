@@ -71,4 +71,13 @@ public class AddressbookControllerTest extends TestCase{
 		assertTrue(view.gotUpdated);
 	}
 	
+	@Test
+	public void test_ViewIsToldToUpdateWhenViewIsSet() {
+		view = new FakeGUI();
+		assertFalse(view.gotUpdated);
+		
+		controller.setView(view);
+		assertTrue(view.gotUpdated);
+	}
+	
 }

@@ -30,6 +30,7 @@ public class AddressbookController {
 	
 	public void setView(AddressbookView view) {
 		this.view = view;
+		view.updateAddressbook(model);
 	}
 	
 }
