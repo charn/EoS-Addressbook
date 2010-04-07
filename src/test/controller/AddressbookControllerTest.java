@@ -44,7 +44,7 @@ public class AddressbookControllerTest extends TestCase{
 	
 	@Test
 	public void test_newPersonIsAdded() {
-		controller.itemAdded(ESA);
+		controller.addItem(ESA);
 		
 		boolean isAddedToModel = false;
 		
@@ -61,7 +61,7 @@ public class AddressbookControllerTest extends TestCase{
 	
 	@Test
 	public void test_PersonIsDeleted() {
-		controller.itemDeleted(JORMA.getId());
+		controller.removeItem(JORMA.getId());
 		
 		boolean itemGetsDeletedFromTheModel = true;
 	

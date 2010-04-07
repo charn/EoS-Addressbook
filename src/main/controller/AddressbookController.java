@@ -12,12 +12,12 @@ public class AddressbookController {
 		this.model = model;
 	}
 
-	public void itemAdded(AddressbookItem item) {
+	public void addItem(AddressbookItem item) {
 		model.add(item);
 		
 	}
 
-	public void itemDeleted(int id) {
+	public void removeItem(int id) {
 		model.remove(id);
 		
 	}
