@@ -20,7 +20,7 @@ import main.model.AddressbookModel;
  *
  */
 
-public class GUI extends JFrame {
+public class GUI extends JFrame implements AddressbookView {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -71,6 +71,11 @@ public class GUI extends JFrame {
 		tableModel = new ContactInfoTableModel(test); //test pitää korvata varsinaisella modelilla 
 		contactInfoTable = new JTable(tableModel);
 		return contactInfoTable;
+	}
+
+	public void updateAddressbook(AddressbookModel model) {
+		this.tableModel.updateAddressbook(model);
+		
 	}
 
 }

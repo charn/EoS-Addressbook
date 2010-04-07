@@ -27,6 +27,11 @@ public class ContactInfoTableModel extends AbstractTableModel {
 		this.addressbookModel = model; 
 	}
 	
+	public void updateAddressbook(AddressbookModel model) {
+		this.addressbookModel = model;
+		this.fireTableDataChanged();
+	}
+	
 	public int getRowCount() {
 		return addressbookModel.itemAmount();
 	}
