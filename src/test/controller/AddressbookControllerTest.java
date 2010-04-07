@@ -1,6 +1,6 @@
 package test.controller;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
@@ -11,7 +11,6 @@ import main.model.*;
 
 import static test.TestDummies.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class AddressbookControllerTest extends TestCase{
 
 	private AddressbookModel model;
 	private AddressbookController controller;
-	
+	private FakeGUI view;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -31,6 +30,8 @@ public class AddressbookControllerTest extends TestCase{
 		model.add(PETTERI);
 		
 		this.controller = new AddressbookController(model);
+		this.view = new FakeGUI();
+		controller.setView(view);
 	}
 
 	@Test
@@ -46,8 +47,9 @@ public class AddressbookControllerTest extends TestCase{
 	}
 	
 	@Test
-	public void test_ViewIsToldToUpdate() {
-		test_newPersonIsAdded();
+	public void test_ViewIsToldToUpdateWhenAdding() {
+		controller.addItem(ESA);
+		assertTrue(view.gotUpdated);
 	}
 	
 	@Test
@@ -61,6 +63,12 @@ public class AddressbookControllerTest extends TestCase{
 				itemGetsDeletedFromTheModel = false;
 
 		assertTrue(itemGetsDeletedFromTheModel);
+	}
+	
+	@Test
+	public void test_ViewIsToldToUpdateWhenRemoving() {
+		controller.removeItem(JORMA.getId());
+		assertTrue(view.gotUpdated);
 	}
 	
 }
