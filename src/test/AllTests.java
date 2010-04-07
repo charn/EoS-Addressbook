@@ -11,6 +11,7 @@ public class AllTests {
 		suite.addTestSuite(FirstTest.class);
 		suite.addTestSuite(AddressbookItemTest.class);
 		suite.addTestSuite(ModelTest.class);
+		suite.addTestSuite(test.controller.AddressbookControllerTest.class);
 		//$JUnit-END$
 		return suite;
 	}
