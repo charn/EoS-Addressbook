@@ -2,6 +2,7 @@ package main.view;
 
 import javax.swing.table.AbstractTableModel;
 
+import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 
 /**
@@ -27,7 +28,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 	}
 	
 	public int getRowCount() {
-		return addressbookModel.itemAmount() + 1;
+		return addressbookModel.itemAmount();
 	}
 	
 	public int getColumnCount() {
@@ -35,7 +36,16 @@ public class ContactInfoTableModel extends AbstractTableModel {
 	}
 	
 	public Object getValueAt(int row, int column) {
-		return null; //TODO
+		AddressbookItem item = addressbookModel.get(row);
+		String[] columns = new String[]{
+				item.getFirstName(),
+				item.getLastName(),
+				item.getEmail(),
+				item.getPhoneNumber(),
+				item.getAddress(),
+				
+        };
+        return columns[column];
 	}
 	 
 	public String getColumnName(int col) {

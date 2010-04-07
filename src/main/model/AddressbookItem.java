@@ -27,6 +27,26 @@ public class AddressbookItem {
 	}
 	
 	public int getId(){
-		return id;
+		return this.id;
+	}
+	
+	public String getFirstName(){
+		return this.firstname;
+	}
+	
+	public String getLastName(){
+		return this.lastname;
+	}
+	
+	public String getEmail(){
+		return this.email;
+	}
+	
+	public String getPhoneNumber(){
+		return this.phonenumber;
+	}
+	
+	public String getAddress(){
+		return this.address;
 	}
 }
