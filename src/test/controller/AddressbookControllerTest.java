@@ -25,23 +25,14 @@ public class AddressbookControllerTest extends TestCase{
 	public void setUp() throws Exception {
 		
 		this.model = new AddressbookModel();
-		this.controller = new AddressbookController(model);
 		
 		// Luodaan testidataa.
 		model.add(JORMA);
-//		model.add(ESA);
 		model.add(PETTERI);
+		
+		this.controller = new AddressbookController(model);
 	}
 
-//	@After
-//	public void tearDown() throws Exception {
-//	}
-
-	@Test
-	public void test_create_new_addressbook_controller() {
-		assertTrue(true);
-	}
-	
 	@Test
 	public void test_newPersonIsAdded() {
 		controller.addItem(ESA);
