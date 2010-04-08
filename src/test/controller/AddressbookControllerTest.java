@@ -35,6 +35,15 @@ public class AddressbookControllerTest extends TestCase{
 	}
 
 	@Test
+	public void test_ViewIsToldToUpdateWhenViewIsSet() {
+		view = new FakeGUI();
+		assertEquals(view.numberOfUpdates, 0);
+		
+		controller.setView(view);
+		assertEquals(view.numberOfUpdates, 1);
+	}
+	
+	@Test
 	public void test_newPersonIsAdded() {
 		controller.addItem(ESA);
 		
@@ -49,7 +58,8 @@ public class AddressbookControllerTest extends TestCase{
 	@Test
 	public void test_ViewIsToldToUpdateWhenAdding() {
 		controller.addItem(ESA);
-		assertTrue(view.gotUpdated);
+		// 1. päivitys viewin asettamisessa ja 2. lisäämisessä.
+		assertEquals(view.numberOfUpdates, 2);
 	}
 	
 	@Test
@@ -68,16 +78,7 @@ public class AddressbookControllerTest extends TestCase{
 	@Test
 	public void test_ViewIsToldToUpdateWhenRemoving() {
 		controller.removeItem(JORMA.getId());
-		assertTrue(view.gotUpdated);
-	}
-	
-	@Test
-	public void test_ViewIsToldToUpdateWhenViewIsSet() {
-		view = new FakeGUI();
-		assertFalse(view.gotUpdated);
-		
-		controller.setView(view);
-		assertTrue(view.gotUpdated);
+		this.assertEquals(view.numberOfUpdates, 2);
 	}
 	
 }

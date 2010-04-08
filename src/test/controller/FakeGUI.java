@@ -6,11 +6,11 @@ import main.view.AddressbookView;
 public class FakeGUI implements AddressbookView {
 
 	public AddressbookModel model;
-	public boolean gotUpdated = false;
+	public int numberOfUpdates = 0;
 	
 	public void updateAddressbook(AddressbookModel model) {
 		this.model = model;
-		this.gotUpdated = true;
+		++this.numberOfUpdates;
 	}
 
 
