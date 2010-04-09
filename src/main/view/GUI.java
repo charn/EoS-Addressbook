@@ -2,13 +2,17 @@ package main.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
 
 import main.controller.AddressbookController;
-import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 
 /**
@@ -21,12 +25,20 @@ import main.model.AddressbookModel;
  *
  */
 
-public class GUI extends JFrame implements AddressbookView {
+public class GUI extends JFrame implements AddressbookView, ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private JTable contactInfoTable;
 	private ContactInfoTableModel tableModel;
+	
+	private JToolBar toolBar;
+	
+	private JPanel contentPane;
+	
+	private JButton addButton;
+	private JButton removeButton;
+
 	
 	private AddressbookController controller;
 	
@@ -38,11 +50,27 @@ public class GUI extends JFrame implements AddressbookView {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Luodaan sisältö paneeli johon voidaan lisätä tavaraa
-		JPanel contentPane = new JPanel(new BorderLayout());
+		contentPane = new JPanel(new BorderLayout());
+		
+		//Luodaan työkalupalkki ja nappulat siihen
+		toolBar = new JToolBar("Still draggable");
+		
+		addButton = new JButton("Add");
+		removeButton = new JButton("Remove");
+		
+		addButton.addActionListener(this);
+		removeButton.addActionListener(this);
+
+		
+		toolBar.add(addButton);
+		toolBar.add(removeButton);
+		
+		//Lisätään työkalupalkki sisältöpaneeliin
+		contentPane.add(toolBar, BorderLayout.PAGE_START);
 		
 		//Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
 		JScrollPane scrollPane = new JScrollPane(initContactInfoTable());
-		contentPane.add(scrollPane);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		setResizable(true);
 		setMinimumSize(new Dimension(300,300));
@@ -61,7 +89,23 @@ public class GUI extends JFrame implements AddressbookView {
 	}
 
 	public void updateAddressbook(AddressbookModel model) {
-		this.tableModel.updateAddressbook(model);
+		tableModel.updateAddressbook(model);
+		
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == addButton) {
+			AddDialog dialog = new AddDialog(this, controller);
+			dialog.pack();
+			
+			dialog.setLocationRelativeTo(this);
+            dialog.setVisible(true);
+		}
+		
+		else if(e.getSource() == removeButton) {
+			controller.removeItem(tableModel.getContactId(contactInfoTable.getSelectedRow()));
+		}
 		
 	}
 

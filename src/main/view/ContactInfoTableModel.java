@@ -62,4 +62,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
         return columnNames[col].toString();
     }
 
+	public int getContactId(int row) {
+		return addressbookModel.get(row).getId();
+	}
 }

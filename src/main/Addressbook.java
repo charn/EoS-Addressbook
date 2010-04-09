@@ -1,7 +1,6 @@
 package main;
 
 import main.controller.AddressbookController;
-import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 import main.view.GUI;
 
