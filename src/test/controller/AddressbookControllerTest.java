@@ -78,7 +78,41 @@ public class AddressbookControllerTest extends TestCase{
 	@Test
 	public void test_ViewIsToldToUpdateWhenRemoving() {
 		controller.removeItem(JORMA.getId());
-		this.assertEquals(view.numberOfUpdates, 2);
+		assertEquals(view.numberOfUpdates, 2);
 	}
 	
+	@Test
+	public void test_ContactFirstNameIsChanged() {
+		controller.fireFirstNameChanged(JORMA, "Keijo");
+		assertEquals(JORMA.getFirstName(),"Keijo");
+		assertEquals(view.numberOfUpdates, 2);
+	}
+	
+	@Test
+	public void test_ContactLastNameIsChanged() {
+		controller.fireLastNameChanged(JORMA, "Keijo");
+		assertEquals(JORMA.getLastName(),"Keijo");
+		assertEquals(view.numberOfUpdates, 2);
+	}
+
+	@Test
+	public void test_ContactPhoneNumberIsChanged() {
+		controller.firePhoneNumberChanged(JORMA, "99999999");
+		assertEquals(JORMA.getPhoneNumber(),"99999999");
+		assertEquals(view.numberOfUpdates, 2);
+	}
+	
+	@Test
+	public void test_ContactAddressIsChanged() {
+		controller.fireAddressChanged(JORMA, "99999999");
+		assertEquals(JORMA.getAddress(),"99999999");
+		assertEquals(view.numberOfUpdates, 2);
+	}
+
+	@Test
+	public void test_ContactEmailIsChanged() {
+		controller.fireEmailChanged(JORMA, "99999999");
+		assertEquals(JORMA.getEmail(),"99999999");
+		assertEquals(view.numberOfUpdates, 2);
+	}
 }

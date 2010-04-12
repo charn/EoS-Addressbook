@@ -83,7 +83,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	}
 	
 	public JTable initContactInfoTable(){
-		tableModel = new ContactInfoTableModel();
+		tableModel = new ContactInfoTableModel(this.controller);
 		contactInfoTable = new JTable(tableModel);
 		return contactInfoTable;
 	}

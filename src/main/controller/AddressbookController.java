@@ -30,7 +30,32 @@ public class AddressbookController {
 	
 	public void setView(AddressbookView view) {
 		this.view = view;
-		view.updateAddressbook(model);
+		updateView();
+	}
+	
+	public void fireFirstNameChanged(AddressbookItem contact, String newValue) {
+		contact.setFirstname(newValue);
+		updateView();
+	}
+	
+	public void fireLastNameChanged(AddressbookItem contact, String newValue) {
+		contact.setLastname(newValue);
+		updateView();
+	}
+
+	public void firePhoneNumberChanged(AddressbookItem contact, String newValue) {
+		contact.setPhonenumber(newValue);
+		updateView();
+	}
+	
+	public void fireAddressChanged(AddressbookItem contact, String newValue) {
+		contact.setAddress(newValue);
+		updateView();
+	}
+	
+	public void fireEmailChanged(AddressbookItem contact, String newValue) {
+		contact.setEmail(newValue);
+		updateView();
 	}
 	
 }

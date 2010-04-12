@@ -1,7 +1,11 @@
 package main.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 
+import main.controller.AddressbookController;
 import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 
@@ -16,21 +20,20 @@ import main.model.AddressbookModel;
 public class ContactInfoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
+	
 	private AddressbookModel addressbookModel;
+	AddressbookController controller;
+	
 	private String[] columnNames = {"First name",
 									"Last name",
 									"Email",
 									"Phone number",
 									"Address"};
 	
-	
-	public ContactInfoTableModel() {
+	public ContactInfoTableModel(AddressbookController controller) {
 		this.addressbookModel = new AddressbookModel();
+		this.controller = controller;
 	}
-	
-//	public ContactInfoTableModel(AddressbookModel model){
-//		this.addressbookModel = model; 
-//	}
 	
 	public void updateAddressbook(AddressbookModel model) {
 		this.addressbookModel = model;
@@ -57,7 +60,37 @@ public class ContactInfoTableModel extends AbstractTableModel {
         };
         return columns[column];
 	}
-	 
+	
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		String newValue = (String) aValue;
+		AddressbookItem item = addressbookModel.get(rowIndex);
+		
+		switch (columnIndex) {
+			case 0:
+				controller.fireFirstNameChanged(item, newValue);
+				break;
+			case 1:
+				controller.fireLastNameChanged(item, newValue);
+				break;
+			case 2:
+				controller.fireEmailChanged(item, newValue);
+				break;
+			case 3:
+				controller.firePhoneNumberChanged(item, newValue);
+				break;
+			case 4:
+				controller.fireAddressChanged(item, newValue);
+				break;
+			default:
+				System.out.println("Not implemented.");
+				break;
+		}
+	}
+	
+	public boolean isCellEditable(int row, int column) {
+		return true;
+	}
+	
 	public String getColumnName(int col) {
         return columnNames[col].toString();
     }
