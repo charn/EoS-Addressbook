@@ -1,5 +1,6 @@
 package main.model;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,15 @@ public class AddressbookModel {
 			return false;
 		}
 		
+	}
+	
+	public AddressbookItem remove(AddressbookItem item) {
+		int index = items.indexOf(item);
+		return items.remove(index);
+	}
+	
+	public List<AddressbookItem> getItemsList() {
+		return Collections.unmodifiableList(this.items);
 	}
 	
 	public AddressbookItem get(int index){
