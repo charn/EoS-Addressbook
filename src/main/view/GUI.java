@@ -107,7 +107,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		else if(e.getSource() == removeButton) {
 			int selectedRow = contactInfoTable.getSelectedRow();
 			
-			if(selectedRow >= 0)
+			if(selectedRow >= 0 && selectedRow != contactInfoTable.getEditingRow())
 				controller.removeItem(selectedRow);
 		}
 		
