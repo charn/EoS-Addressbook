@@ -29,9 +29,11 @@ public class AddressbookController {
 	}
 	
 	public void removeItem(int row) {
-		AddressbookItem item = model.getItemsList().get(row);
-		model.remove(item);
-		updateView();
+		if (row >= 0) {
+			AddressbookItem item = model.getItemsList().get(row);
+			model.remove(item);
+			updateView();
+		}
 	}
 
 	private void updateView() {
