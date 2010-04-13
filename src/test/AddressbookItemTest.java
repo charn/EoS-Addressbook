@@ -21,12 +21,13 @@ public class AddressbookItemTest extends TestCase{
 	}
 	
 	@Test
-	public void testAscendingIdSequenceToNewItems(){
-		AddressbookItem itemA = new AddressbookItem("a", "a", "a", "a", "a");
-		int itemAId = itemA.getId();
-		
-		assertEquals(new AddressbookItem("b", "b", "b", "b", "b").getId(), itemAId + 1);
-		assertEquals(new AddressbookItem("c", "c", "c", "c", "c").getId(), itemAId + 2);
+	public void testnewEmptyItem() {
+		AddressbookItem item = new AddressbookItem();
+		assertEquals(item.getFirstName(), "");
+		assertEquals(item.getLastName(), "");
+		assertEquals(item.getEmail(), "");
+		assertEquals(item.getPhoneNumber(), "");
+		assertEquals(item.getAddress(), "");
 	}
 	
 	@Test

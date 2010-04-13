@@ -62,20 +62,7 @@ public class AddressbookControllerTest extends TestCase{
 		assertEquals(view.numberOfUpdates, 2);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
-	public void test_PersonIsDeleted() {
-		controller.removeItemById(JORMA.getId());
-		
-		boolean itemGetsDeletedFromTheModel = true;
-	
-		for (Iterator<AddressbookItem> i = model.iterator(); i.hasNext(); )
-			if (i.next() == JORMA)
-				itemGetsDeletedFromTheModel = false;
-
-		assertTrue(itemGetsDeletedFromTheModel);
-	}
-	
 	public void test_PersonIsDeleted2() {
 				
 		int deletedRow = 0;
@@ -94,7 +81,7 @@ public class AddressbookControllerTest extends TestCase{
 	
 	@Test
 	public void test_ViewIsToldToUpdateWhenRemoving() {
-		controller.removeItem(JORMA.getId());
+		controller.removeItem(0);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 	

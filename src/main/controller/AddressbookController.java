@@ -19,15 +19,6 @@ public class AddressbookController {
 		updateView();
 	}
 
-	/**
-	 * @deprecated
-	 * @param id
-	 */
-	public void removeItemById(int id) {
-		model.remove(id);
-		updateView();
-	}
-	
 	public void removeItem(int row) {
 		if (row >= 0) {
 			AddressbookItem item = model.getItemsList().get(row);

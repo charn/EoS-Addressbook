@@ -20,27 +20,7 @@ public class AddressbookModel {
 	public void add(AddressbookItem item){
 		items.add(item);
 	}
-	
-	/**
-	 * Olettaa, että id:t ovat yksikäsitteisiä, eli poistaa vain yhden itemin
-	 * @deprecated
-	 */
-	public boolean remove(int id){
-		int indexOfItemToBeRemoved = -1;
-		for (int i = 0; i < items.size(); i++){
-			if (items.get(i).getId() == id)
-				indexOfItemToBeRemoved = i;
-		}
 		
-		if (indexOfItemToBeRemoved > -1){
-			items.remove(indexOfItemToBeRemoved);
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-	
 	/**
 	 * Poistaa tietorakenteesta halutun tietueen.
 	 * @param item

@@ -45,28 +45,19 @@ public class ModelTest extends TestCase{
 		assertEquals(model.get(2), item3);*/
 	}
 	
+	@Test 
+	public void testGettingItems() {
+		model.add(ESA);
+		assertEquals(model.get(0), ESA);
+	}
+	
 	@Test
-	public void testRemoveItems(){
-		AddressbookItem item1 = ESA;
-		AddressbookItem item2 = JORMA;
-		AddressbookItem item3 = PETTERI;
-		
-		model.add(item1);
-		model.add(item2);
-		model.add(item3);
-		assertEquals(model.get(0), item1);
-		assertEquals(model.get(1), item2);
-		assertEquals(model.get(2), item3);
-		
-		model.remove(item2);
-		assertEquals(model.get(0), item1);
-		assertEquals(model.get(1), item3);
-		
-		model.remove(item1);
-		assertEquals(model.get(0), item3);
-		
-		model.remove(item3);
-		assertTrue(model.isEmpty());
+	public void testSizeWorks() {
+		assertEquals(model.itemAmount(), 0);
+		model.add(ESA);
+		assertEquals(model.itemAmount(), 1);
+		model.add(JORMA);
+		assertEquals(model.itemAmount(), 2);
 	}
 	
 	@Test
@@ -101,6 +92,7 @@ public class ModelTest extends TestCase{
 		assertEquals(lista.size(),3);
 	}
 
+	@Test
 	public void testListIsUnmodifiable() {
 		model.add(ESA);
 		
