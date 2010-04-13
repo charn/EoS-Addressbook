@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 
 import main.controller.AddressbookController;
-import main.model.AddressbookModel;
+import main.model.AddressbookItem;
 
 /**
  * 
@@ -87,8 +88,8 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		contactInfoTable = new JTable(tableModel);
 		return contactInfoTable;
 	}
-
-	public void updateAddressbook(AddressbookModel model) {
+	
+	public void updateAddressbook(List<AddressbookItem> model) {
 		tableModel.updateAddressbook(model);
 		
 	}
@@ -104,7 +105,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		}
 		
 		else if(e.getSource() == removeButton) {
-			controller.removeItem(tableModel.getContactId(contactInfoTable.getSelectedRow()));
+			controller.removeItem(contactInfoTable.getSelectedRow());
 		}
 		
 	}

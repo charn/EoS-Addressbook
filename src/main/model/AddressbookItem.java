@@ -26,6 +26,10 @@ public class AddressbookItem {
 		this.address = address;
 	}
 	
+	public AddressbookItem() {
+		this("","","","","");
+	}
+	
 	public int getId(){
 		return this.id;
 	}
@@ -50,8 +54,29 @@ public class AddressbookItem {
 		return this.address;
 	}
 
+	public AddressbookItem withFirstName(String firstname) {
+		return new AddressbookItem(firstname,lastname,email,phonenumber,address);
+	}
+	
+	public AddressbookItem withLastName(String lastname) {
+		return new AddressbookItem(firstname,lastname,email,phonenumber,address);
+	}
+	
+	public AddressbookItem withEmail(String email) {
+		return new AddressbookItem(firstname,lastname,email,phonenumber,address);
+	}
+	
+	public AddressbookItem withPhoneNumber(String phonenumber) {
+		return new AddressbookItem(firstname,lastname,email,phonenumber,address);
+	}
+	
+	public AddressbookItem withAddress(String address) {
+		return new AddressbookItem(firstname,lastname,email,phonenumber,address);
+	}
+	
 	/**
 	 * @param maxId the maxId to set
+	 * @deprecated
 	 */
 	public static void setMaxId(int maxId)
 	{
@@ -60,6 +85,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param id the id to set
+	 * @deprecated
 	 */
 	public void setId(int id)
 	{
@@ -68,6 +94,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param firstname the firstname to set
+	 * @deprecated
 	 */
 	public void setFirstname(String firstname)
 	{
@@ -76,6 +103,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param lastname the lastname to set
+	 * @deprecated
 	 */
 	public void setLastname(String lastname)
 	{
@@ -84,6 +112,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param email the email to set
+	 * @deprecated
 	 */
 	public void setEmail(String email)
 	{
@@ -92,6 +121,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param phonenumber the phonenumber to set
+	 * @deprecated
 	 */
 	public void setPhonenumber(String phonenumber)
 	{
@@ -100,6 +130,7 @@ public class AddressbookItem {
 
 	/**
 	 * @param address the address to set
+	 * @deprecated
 	 */
 	public void setAddress(String address)
 	{

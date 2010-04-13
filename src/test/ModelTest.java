@@ -58,14 +58,14 @@ public class ModelTest extends TestCase{
 		assertEquals(model.get(1), item2);
 		assertEquals(model.get(2), item3);
 		
-		model.remove(item2.getId());
+		model.remove(item2);
 		assertEquals(model.get(0), item1);
 		assertEquals(model.get(1), item3);
 		
-		model.remove(item1.getId());
+		model.remove(item1);
 		assertEquals(model.get(0), item3);
 		
-		model.remove(item3.getId());
+		model.remove(item3);
 		assertTrue(model.isEmpty());
 	}
 	
@@ -116,5 +116,18 @@ public class ModelTest extends TestCase{
 			//Exception thrown as expected
 		}
 		
+	}
+	
+	@Test
+	public void testUpdatingAnItem() {
+		model.add(ESA);
+		AddressbookItem newESA = ESA.withLastName("Keijola");
+		
+		model.updateItem(ESA, newESA);
+		
+		List<AddressbookItem> lista = model.getItemsList();
+		
+		assertFalse(lista.contains(ESA));
+		assertTrue(lista.contains(newESA));
 	}
 }

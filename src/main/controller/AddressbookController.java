@@ -19,13 +19,23 @@ public class AddressbookController {
 		updateView();
 	}
 
-	public void removeItem(int id) {
+	/**
+	 * @deprecated
+	 * @param id
+	 */
+	public void removeItemById(int id) {
 		model.remove(id);
+		updateView();
+	}
+	
+	public void removeItem(int row) {
+		AddressbookItem item = model.getItemsList().get(row);
+		model.remove(item);
 		updateView();
 	}
 
 	private void updateView() {
-		view.updateAddressbook(model);
+		view.updateAddressbook(model.getItemsList());
 	}
 	
 	public void setView(AddressbookView view) {
@@ -34,27 +44,27 @@ public class AddressbookController {
 	}
 	
 	public void fireFirstNameChanged(AddressbookItem contact, String newValue) {
-		contact.setFirstname(newValue);
+		model.updateItem(contact, contact.withFirstName(newValue));
 		updateView();
 	}
 	
 	public void fireLastNameChanged(AddressbookItem contact, String newValue) {
-		contact.setLastname(newValue);
+		model.updateItem(contact, contact.withLastName(newValue));
 		updateView();
 	}
 
 	public void firePhoneNumberChanged(AddressbookItem contact, String newValue) {
-		contact.setPhonenumber(newValue);
+		model.updateItem(contact, contact.withPhoneNumber(newValue));
 		updateView();
 	}
 	
 	public void fireAddressChanged(AddressbookItem contact, String newValue) {
-		contact.setAddress(newValue);
+		model.updateItem(contact, contact.withAddress(newValue));
 		updateView();
 	}
 	
 	public void fireEmailChanged(AddressbookItem contact, String newValue) {
-		contact.setEmail(newValue);
+		model.updateItem(contact, contact.withEmail(newValue));
 		updateView();
 	}
 	

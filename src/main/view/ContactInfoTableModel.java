@@ -21,7 +21,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private AddressbookModel addressbookModel;
+	private final List<AddressbookItem> itemsList;
 	AddressbookController controller;
 	
 	private String[] columnNames = {"First name",
@@ -31,17 +31,24 @@ public class ContactInfoTableModel extends AbstractTableModel {
 									"Address"};
 	
 	public ContactInfoTableModel(AddressbookController controller) {
-		this.addressbookModel = new AddressbookModel();
+		this.itemsList = new ArrayList<AddressbookItem>();
 		this.controller = controller;
 	}
 	
 	public void updateAddressbook(AddressbookModel model) {
-		this.addressbookModel = model;
+		this.itemsList.clear();
+		this.itemsList.addAll(model.getItemsList());
+		this.fireTableDataChanged();
+	}
+	
+	public void updateAddressbook(List<AddressbookItem> itemsList) {
+		this.itemsList.clear();
+		this.itemsList.addAll(itemsList);
 		this.fireTableDataChanged();
 	}
 	
 	public int getRowCount() {
-		return addressbookModel.itemAmount();
+		return itemsList.size();
 	}
 	
 	public int getColumnCount() {
@@ -49,7 +56,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 	}
 	
 	public Object getValueAt(int row, int column) {
-		AddressbookItem item = addressbookModel.get(row);
+		AddressbookItem item = itemsList.get(row);
 		String[] columns = new String[]{
 				item.getFirstName(),
 				item.getLastName(),
@@ -63,7 +70,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 	
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		String newValue = (String) aValue;
-		AddressbookItem item = addressbookModel.get(rowIndex);
+		AddressbookItem item = itemsList.get(rowIndex);
 		
 		switch (columnIndex) {
 			case 0:
@@ -95,7 +102,4 @@ public class ContactInfoTableModel extends AbstractTableModel {
         return columnNames[col].toString();
     }
 
-	public int getContactId(int row) {
-		return addressbookModel.get(row).getId();
-	}
 }

@@ -1,8 +1,10 @@
 package main.view;
 
-import main.model.AddressbookModel;
+import java.util.List;
+
+import main.model.AddressbookItem;
 
 public interface AddressbookView {
 
-	void updateAddressbook(AddressbookModel model);
+	void updateAddressbook(List<AddressbookItem> items);
 }

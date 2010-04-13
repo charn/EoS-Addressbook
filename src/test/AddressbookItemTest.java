@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import main.model.AddressbookItem;
 
+import static test.TestDummies.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +27,77 @@ public class AddressbookItemTest extends TestCase{
 		
 		assertEquals(new AddressbookItem("b", "b", "b", "b", "b").getId(), itemAId + 1);
 		assertEquals(new AddressbookItem("c", "c", "c", "c", "c").getId(), itemAId + 2);
+	}
+	
+	@Test
+	public void testWithMethodsReturnNewAddressbookItem() {
+		AddressbookItem seppo = ESA.withFirstName("Seppo");
+		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withLastName("Seppola");
+		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withEmail("asdf@asdf.fi");
+		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withPhoneNumber("12345");
+		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withAddress("Katu 123");
+		assertNotSame(ESA, seppo);
+	}
+	
+	@Test
+	public void testWithMethodsReturnNewItemWithChangedParameter() {
+		// Firstname
+		AddressbookItem seppo = ESA.withFirstName("Seppo");
+		
+		assertEquals(seppo.getFirstName(), "Seppo");
+		
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		
+		// Lastname
+		seppo = ESA.withLastName("Seppola");
+		
+		assertEquals(seppo.getLastName(), "Seppola");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		
+		// Email
+		seppo = ESA.withEmail("asdf@asdf.fi");
+		
+		assertEquals(seppo.getEmail(), "asdf@asdf.fi");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		
+		// PhoneNumber
+		seppo = ESA.withPhoneNumber("12345");
+		
+		assertEquals(seppo.getPhoneNumber(), "12345");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		
+		// Address
+		seppo = ESA.withAddress("Katu 123");
+		
+		assertEquals(seppo.getAddress(), "Katu 123");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 	}
 
 }

@@ -23,6 +23,7 @@ public class AddressbookModel {
 	
 	/**
 	 * Olettaa, että id:t ovat yksikäsitteisiä, eli poistaa vain yhden itemin
+	 * @deprecated
 	 */
 	public boolean remove(int id){
 		int indexOfItemToBeRemoved = -1;
@@ -40,11 +41,21 @@ public class AddressbookModel {
 		
 	}
 	
+	/**
+	 * Poistaa tietorakenteesta halutun tietueen.
+	 * @param item
+	 * @return Poistettu tietue.
+	 */
 	public AddressbookItem remove(AddressbookItem item) {
 		int index = items.indexOf(item);
 		return items.remove(index);
 	}
 	
+	/**
+	 * Palauttaa listan, jota ei voi muokata. Listaa muokataan ainoastaan tämän
+	 * luokan tarjoamien muoden metodien kautta.
+	 * @return Collections.unmodifiableList
+	 */
 	public List<AddressbookItem> getItemsList() {
 		return Collections.unmodifiableList(this.items);
 	}
@@ -59,5 +70,9 @@ public class AddressbookModel {
 	
 	public int itemAmount(){
 		return items.size();
+	}
+
+	public void updateItem(AddressbookItem oldItem, AddressbookItem newItem) {
+		this.items.set(this.items.indexOf(oldItem), newItem);
 	}
 }

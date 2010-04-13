@@ -62,14 +62,31 @@ public class AddressbookControllerTest extends TestCase{
 		assertEquals(view.numberOfUpdates, 2);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test_PersonIsDeleted() {
-		controller.removeItem(JORMA.getId());
+		controller.removeItemById(JORMA.getId());
 		
 		boolean itemGetsDeletedFromTheModel = true;
 	
 		for (Iterator<AddressbookItem> i = model.iterator(); i.hasNext(); )
 			if (i.next() == JORMA)
+				itemGetsDeletedFromTheModel = false;
+
+		assertTrue(itemGetsDeletedFromTheModel);
+	}
+	
+	public void test_PersonIsDeleted2() {
+				
+		int deletedRow = 0;
+		
+		AddressbookItem deletedItem = view.itemsList.get(deletedRow);
+		controller.removeItem(deletedRow);
+		
+		boolean itemGetsDeletedFromTheModel = true;
+	
+		for (Iterator<AddressbookItem> i = model.iterator(); i.hasNext(); )
+			if (i.next() == deletedItem)
 				itemGetsDeletedFromTheModel = false;
 
 		assertTrue(itemGetsDeletedFromTheModel);
@@ -83,36 +100,61 @@ public class AddressbookControllerTest extends TestCase{
 	
 	@Test
 	public void test_ContactFirstNameIsChanged() {
-		controller.fireFirstNameChanged(JORMA, "Keijo");
-		assertEquals(JORMA.getFirstName(),"Keijo");
+		
+		String newName = "Keijo";
+		int editedItemRow = 0;
+		
+		controller.fireFirstNameChanged(JORMA, newName);
+		
+		assertEquals(view.itemsList.get(editedItemRow).getFirstName(), newName);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 	
 	@Test
 	public void test_ContactLastNameIsChanged() {
-		controller.fireLastNameChanged(JORMA, "Keijo");
-		assertEquals(JORMA.getLastName(),"Keijo");
+		
+		String newValue = "Keijo";
+		int editedItemRow = 0;
+		
+		controller.fireLastNameChanged(JORMA, newValue);
+		
+		assertEquals(view.itemsList.get(editedItemRow).getLastName(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 
 	@Test
 	public void test_ContactPhoneNumberIsChanged() {
-		controller.firePhoneNumberChanged(JORMA, "99999999");
-		assertEquals(JORMA.getPhoneNumber(),"99999999");
+		
+		String newValue = "";
+		int editedItemRow = 0;
+		
+		controller.firePhoneNumberChanged(JORMA, newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getPhoneNumber(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 	
 	@Test
 	public void test_ContactAddressIsChanged() {
-		controller.fireAddressChanged(JORMA, "99999999");
-		assertEquals(JORMA.getAddress(),"99999999");
+		
+		String newValue = "Katu 321";
+		int editedItemRow = 0;
+		
+		controller.fireAddressChanged(JORMA, newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getAddress(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 
 	@Test
 	public void test_ContactEmailIsChanged() {
-		controller.fireEmailChanged(JORMA, "99999999");
-		assertEquals(JORMA.getEmail(),"99999999");
+		
+		String newValue = "asdf@asdf.com";
+		int editedItemRow = 0;
+		
+		controller.fireEmailChanged(JORMA, newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getEmail(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
 	}
 }
