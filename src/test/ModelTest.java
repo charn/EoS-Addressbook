@@ -30,19 +30,13 @@ public class ModelTest extends TestCase{
 	
 	@Test
 	public void testAddItems(){
-		AddressbookItem item1 = ESA;
-		AddressbookItem item2 = JORMA;
-		AddressbookItem item3 = PETTERI;
-		model.add(item1);
-		model.add(item2);
-		model.add(item3);
+		model.add(ESA);
+		model.add(JORMA);
+		model.add(PETTERI);
 		Iterator<AddressbookItem> iterator = model.iterator();
-		assertEquals(iterator.next(), item1);
-		assertEquals(iterator.next(), item2);
-		assertEquals(iterator.next(), item3);
-		/*assertEquals(model.get(0), item1);
-		assertEquals(model.get(1), item2);
-		assertEquals(model.get(2), item3);*/
+		assertEquals(iterator.next(), ESA);
+		assertEquals(iterator.next(), JORMA);
+		assertEquals(iterator.next(), PETTERI);
 	}
 	
 	@Test 
