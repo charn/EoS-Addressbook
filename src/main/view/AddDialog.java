@@ -12,6 +12,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
+
+/*
+ * HUOM! Tästä luokasta puuttuu nickname-kenttään liittyvät jutut. Jos tämä luokka otetaan
+ * taas käyttöön niin ne pitäisi lisätä. 
+ */
 class AddDialog extends JDialog implements ActionListener,
 		PropertyChangeListener {
 
@@ -119,7 +124,7 @@ class AddDialog extends JDialog implements ActionListener,
 
 			if (buttonEnter.equals(value)) {
 				controller.addItem(new AddressbookItem(firstNameTextField
-						.getText(), lastNameTextField.getText(), emailTextField.getText(), phoneNumberTextField.getText(),
+						.getText(), lastNameTextField.getText(), "", emailTextField.getText(), phoneNumberTextField.getText(),
 						addressTextField.getText()));
 				
 				clearAndHide();

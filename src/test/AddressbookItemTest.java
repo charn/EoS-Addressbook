@@ -25,6 +25,7 @@ public class AddressbookItemTest extends TestCase{
 		AddressbookItem item = new AddressbookItem();
 		assertEquals(item.getFirstName(), "");
 		assertEquals(item.getLastName(), "");
+		assertEquals(item.getNickname(), "");
 		assertEquals(item.getEmail(), "");
 		assertEquals(item.getPhoneNumber(), "");
 		assertEquals(item.getAddress(), "");
@@ -36,6 +37,9 @@ public class AddressbookItemTest extends TestCase{
 		assertNotSame(ESA, seppo);
 		
 		seppo = ESA.withLastName("Seppola");
+		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withNickname("Sepi");
 		assertNotSame(ESA, seppo);
 		
 		seppo = ESA.withEmail("asdf@asdf.fi");
@@ -56,6 +60,7 @@ public class AddressbookItemTest extends TestCase{
 		assertEquals(seppo.getFirstName(), "Seppo");
 		
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
@@ -66,7 +71,18 @@ public class AddressbookItemTest extends TestCase{
 		assertEquals(seppo.getLastName(), "Seppola");
 		
 		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		
+		// Nickname
+		seppo = ESA.withNickname("Sepi");
+		
+		assertEquals(seppo.getNickname(), "Sepi");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		
@@ -77,6 +93,7 @@ public class AddressbookItemTest extends TestCase{
 		
 		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		
@@ -87,6 +104,7 @@ public class AddressbookItemTest extends TestCase{
 		
 		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		
@@ -97,6 +115,7 @@ public class AddressbookItemTest extends TestCase{
 		
 		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 	}

@@ -26,6 +26,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 	
 	private String[] columnNames = {"First name",
 									"Last name",
+									"Nickname",
 									"Email",
 									"Phone number",
 									"Address"};
@@ -60,6 +61,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 		String[] columns = new String[]{
 				item.getFirstName(),
 				item.getLastName(),
+				item.getNickname(),
 				item.getEmail(),
 				item.getPhoneNumber(),
 				item.getAddress(),
@@ -80,12 +82,15 @@ public class ContactInfoTableModel extends AbstractTableModel {
 				controller.fireLastNameChanged(item, newValue);
 				break;
 			case 2:
-				controller.fireEmailChanged(item, newValue);
+				controller.fireNicknameChanged(item, newValue);
 				break;
 			case 3:
-				controller.firePhoneNumberChanged(item, newValue);
+				controller.fireEmailChanged(item, newValue);
 				break;
 			case 4:
+				controller.firePhoneNumberChanged(item, newValue);
+				break;
+			case 5:
 				controller.fireAddressChanged(item, newValue);
 				break;
 			default:

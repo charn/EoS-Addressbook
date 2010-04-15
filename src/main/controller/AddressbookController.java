@@ -45,6 +45,11 @@ public class AddressbookController {
 		model.updateItem(contact, contact.withLastName(newValue));
 		updateView();
 	}
+	
+	public void fireNicknameChanged(AddressbookItem contact, String newValue) {
+		model.updateItem(contact, contact.withNickname(newValue));
+		updateView();
+	}
 
 	public void firePhoneNumberChanged(AddressbookItem contact, String newValue) {
 		model.updateItem(contact, contact.withPhoneNumber(newValue));
