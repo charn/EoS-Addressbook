@@ -144,4 +144,16 @@ public class AddressbookControllerTest extends TestCase{
 		assertEquals(view.itemsList.get(editedItemRow).getEmail(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
 	}
+	
+	@Test
+	public void test_ContactNicknameIsChanged() {
+		
+		String newValue = "Jortsu";
+		int editedItemRow = 0;
+		
+		controller.fireNicknameChanged(JORMA, newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getNickname(), newValue);
+		assertEquals(view.numberOfUpdates, 2);
+	}
 }
