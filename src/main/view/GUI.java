@@ -84,8 +84,12 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	}
 	
 	public JTable initContactInfoTable(){
-		tableModel = new ContactInfoTableModel(this.controller);
+		tableModel = new ContactInfoTableModel(this.controller);	
+		
 		contactInfoTable = new JTable(tableModel);
+		
+		contactInfoTable.setAutoCreateRowSorter(true);
+		
 		return contactInfoTable;
 	}
 	
@@ -97,14 +101,19 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == addButton) {
-//			AddDialog dialog = new AddDialog(this, controller);
-//			dialog.pack();
-//			
-//			dialog.setLocationRelativeTo(this);
-//            dialog.setVisible(true);
+			//AddDialog dialog = new AddDialog(this, controller);
+			//dialog.pack();
+			//                     
+			//dialog.setLocationRelativeTo(this);
+			//dialog.setVisible(true);
+
             controller.addItem(new AddressbookItem());
-            contactInfoTable.changeSelection(contactInfoTable.getRowCount() - 1, 0, true, false);	
-            contactInfoTable.editCellAt(contactInfoTable.getRowCount() - 1, 0);
+//            int addedRow = contactInfoTable.convertRowIndexToModel(tableModel.getRowCount() - 1);
+
+//            System.out.println(addedRow);
+            
+//            contactInfoTable.changeSelection(addedRow, 0, true, false);	
+//            contactInfoTable.editCellAt(addedRow, 0);
             contactInfoTable.requestFocusInWindow();
 		}
 		
@@ -121,7 +130,9 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 				else
 					nextToBeSelected = selectedRow;
 				
-				controller.removeItem(selectedRow);
+				int delete = contactInfoTable.convertRowIndexToModel(selectedRow);
+				controller.removeItem(delete);
+				
 			}
 
 			if(nextToBeSelected != -1)
