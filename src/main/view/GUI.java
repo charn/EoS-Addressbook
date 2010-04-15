@@ -97,18 +97,35 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == addButton) {
-			AddDialog dialog = new AddDialog(this, controller);
-			dialog.pack();
-			
-			dialog.setLocationRelativeTo(this);
-            dialog.setVisible(true);
+//			AddDialog dialog = new AddDialog(this, controller);
+//			dialog.pack();
+//			
+//			dialog.setLocationRelativeTo(this);
+//            dialog.setVisible(true);
+            controller.addItem(new AddressbookItem());
+            contactInfoTable.changeSelection(contactInfoTable.getRowCount() - 1, 0, true, false);	
+            contactInfoTable.editCellAt(contactInfoTable.getRowCount() - 1, 0);
+            contactInfoTable.requestFocusInWindow();
 		}
 		
 		else if(e.getSource() == removeButton) {
 			int selectedRow = contactInfoTable.getSelectedRow();
 			
-			if(selectedRow >= 0 && selectedRow != contactInfoTable.getEditingRow())
+			int nextToBeSelected = -1;
+			
+			if(selectedRow >= 0 && selectedRow != contactInfoTable.getEditingRow()) {
+				
+				// Selected row is the last on the list
+				if(selectedRow + 1 == contactInfoTable.getRowCount())
+					nextToBeSelected = selectedRow - 1;
+				else
+					nextToBeSelected = selectedRow;
+				
 				controller.removeItem(selectedRow);
+			}
+
+			if(nextToBeSelected != -1)
+				contactInfoTable.changeSelection(nextToBeSelected, 0, false, false);	
 		}
 		
 	}
