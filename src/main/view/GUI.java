@@ -79,7 +79,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		//
 		// Set our main menu
 		// 
-	    setJMenuBar(new MainMenuBar(this));
+	    setJMenuBar(new MainMenuBar(this, controller));
 		
 	}
 	

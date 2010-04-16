@@ -1,5 +1,8 @@
 package main.controller;
 
+import java.util.List;
+
+import main.Addressbook;
 import main.view.AddressbookView;
 import main.model.AddressbookItem;
 import main.model.AddressbookModel;
@@ -66,4 +69,9 @@ public class AddressbookController {
 		updateView();
 	}
 	
+	public void saveModelToFile(){
+		List<AddressbookItem> itemList = model.getItemsForSaving();
+		String fileName = Addressbook.DEFAULT_FILE_FOR_SERIALIZED_ADDRESSBOOKITEMLIST;
+		AddressbookSaver.saveAddressbookItemListToFile(itemList, fileName);
+	}
 }

@@ -12,6 +12,7 @@ public class AllTests {
 		suite.addTestSuite(AddressbookItemTest.class);
 		suite.addTestSuite(ModelTest.class);
 		suite.addTestSuite(test.controller.AddressbookControllerTest.class);
+		suite.addTestSuite(test.controller.AddressbookSaverTest.class);
 		//$JUnit-END$
 		return suite;
 	}

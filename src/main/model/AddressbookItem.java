@@ -1,7 +1,11 @@
 package main.model;
 
-public class AddressbookItem {
+import java.io.Serializable;
 
+public class AddressbookItem implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private String firstname;
 	private String lastname;
 	private String nickname;
@@ -75,6 +79,11 @@ public class AddressbookItem {
 	
 	public AddressbookItem withAddress(String address) {
 		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address);
+	}
+	
+	public String toString(){
+		return firstname + ", " + lastname + ", " + nickname + ", " + email + ", " + 
+		phonenumber + ", " + address;
 	}
 	
 }

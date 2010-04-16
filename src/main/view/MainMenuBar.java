@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import main.controller.AddressbookController;
+
 /**
  * @author toittine
  *
@@ -20,6 +22,7 @@ public class MainMenuBar extends JMenuBar
 {
 	
 	private static final long serialVersionUID = 1L;
+	private AddressbookController controller;
 	
 	JFrame parent = null;
  	  String[] fileItems = new String[] { "New", "Open", "Save", "Exit" };
@@ -30,8 +33,10 @@ public class MainMenuBar extends JMenuBar
 	/**
 	 * 
 	 */
-	public MainMenuBar(JFrame pf)
+	public MainMenuBar(JFrame pf, final AddressbookController controller)
 	{
+		this.controller = controller;
+		
 	    JMenu fileMenu = new JMenu("File");
 	    JMenu editMenu = new JMenu("Edit");
 
@@ -43,6 +48,8 @@ public class MainMenuBar extends JMenuBar
 	      public void actionPerformed(ActionEvent event) 
 	      {
 	    	String cmd = event.getActionCommand();
+	    	if (cmd.equals("Save"))
+	    		controller.saveModelToFile();
 	        System.out.println("Menu item [" + cmd + "] was pressed.");
 	        if (cmd.equals ("Exit")) 
 	        	System.exit(0);

@@ -12,6 +12,10 @@ public class AddressbookModel {
 	public AddressbookModel(){
 		items = new LinkedList<AddressbookItem>();
 	}
+	
+	public AddressbookModel(List<AddressbookItem> itemList){
+		items = new LinkedList<AddressbookItem>(itemList);
+	}
 
 	public Iterator<AddressbookItem> iterator(){
 		return items.iterator();
@@ -54,5 +58,9 @@ public class AddressbookModel {
 
 	public void updateItem(AddressbookItem oldItem, AddressbookItem newItem) {
 		this.items.set(this.items.indexOf(oldItem), newItem);
+	}
+	
+	public List<AddressbookItem> getItemsForSaving() {
+		return this.items;
 	}
 }
