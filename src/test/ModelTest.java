@@ -116,4 +116,22 @@ public class ModelTest extends TestCase{
 		assertFalse(lista.contains(ESA));
 		assertTrue(lista.contains(newESA));
 	}
+	
+	@Test
+	public void test_searchOnEmptyAddressbook() {
+		List<AddressbookItem> result = model.search("");
+		assertEquals(result.size(), 0);
+	}
+	
+	@Test
+	public void test_searchOnNotEmptyAddressbook() {
+		model.add(ESA);
+		model.add(JORMA);
+		model.add(PETTERI);
+		
+		List<AddressbookItem> result = model.search("gmail.com, 050");
+		assertTrue(result.contains(ESA));
+		assertTrue(result.contains(JORMA));
+		assertFalse(result.contains(PETTERI));
+	}
 }
