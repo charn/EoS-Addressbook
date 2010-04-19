@@ -3,6 +3,7 @@ package test.controller;
 //import static org.junit.Assert.*;
 
 import java.util.Iterator;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -53,6 +54,23 @@ public class AddressbookControllerTest extends TestCase{
 			if (i.next() == ESA)
 				isAddedToModel = true;
 		assertTrue(isAddedToModel);
+	}
+	
+	@Test
+	public void test_viewAndModelAreInSyncAfterRemovingItem() {
+		controller.removeItem(0);
+		
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+	}
+
+	@Test
+	public void test_viewAndModelAreInSyncAfterAddingItem() {
+		controller.addItem(new AddressbookItem());
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
 	}
 	
 	@Test
@@ -155,5 +173,70 @@ public class AddressbookControllerTest extends TestCase{
 
 		assertEquals(view.itemsList.get(editedItemRow).getNickname(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
+	}
+	
+	@Test
+	public void test_viewAndModelAreInSyncAfterEditingFields() {
+		int editedItemRow = 0;
+		String newValue = "AsDf12345";
+		AddressbookItem editedItem = view.itemsList.get(editedItemRow);
+		
+		// Firstname
+		controller.fireFirstNameChanged(view.itemsList.get(editedItemRow), newValue);
+		
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+		// Lastname
+		controller.fireLastNameChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+		// Nickname
+		controller.fireNicknameChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+		// Email
+		controller.fireEmailChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+		// Phone number
+		controller.firePhoneNumberChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+		// Address
+		controller.fireAddressChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+
+	}
+	
+	@Test
+	public void test_rightPersonGetsDeletedAfterSearch() {
+		
+		String query = "PETTERI";
+		
+		controller.fireSearchKeywordsEntered(query);
+
+		//Esiehdot
+		assertEquals(model.get(0), JORMA);
+		assertEquals(model.get(1), PETTERI);
+
+		assertEquals(model.search(query).size(),1);
+		
+		//Petterin pitäisi poistua
+		controller.removeItem(0);
+
+		List<AddressbookItem> lista = model.getItemsList();
+		
+		assertTrue(lista.contains(JORMA));
 	}
 }

@@ -1,5 +1,7 @@
 package main.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import main.Addressbook;
@@ -13,29 +15,44 @@ public class AddressbookController {
 	private AddressbookModel model;
 	private AddressbookView view;
 	
+	private String searchKeywords = "";
+	private List<AddressbookItem> items = new ArrayList<AddressbookItem>();
+	
 	public AddressbookController (AddressbookModel model) {
 		this.model = model;
 	}
 
 	public void addItem(AddressbookItem item) {
 		model.add(item);
+		items.add(item);
 		updateView();
 	}
 
 	public void removeItem(int row) {
 		if (row >= 0) {
-			AddressbookItem item = model.getItemsList().get(row);
+			AddressbookItem item = this.items.get(row);
 			model.remove(item);
+			items.remove(items.indexOf(item));
 			updateView();
 		}
 	}
 
 	private void updateView() {
-		view.updateAddressbook(model.getItemsList());
+		view.updateAddressbook(Collections.unmodifiableList(this.items));
 	}
 	
 	public void setView(AddressbookView view) {
 		this.view = view;
+		doSearch();
+	}
+	
+	public void fireSearchKeywordsEntered(String keywords) {
+		this.searchKeywords = keywords;
+		doSearch();
+	}
+	
+	private void doSearch() {
+		this.items = model.search(searchKeywords);
 		updateView();
 	}
 	
@@ -65,6 +82,7 @@ public class AddressbookController {
 	
 	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
 		model.updateItem(existing, updated);
+		items.set(items.indexOf(existing), updated);
 		updateView();
 	}
 	
