@@ -13,6 +13,8 @@ public class AllTests {
 		suite.addTestSuite(ModelTest.class);
 		suite.addTestSuite(test.controller.AddressbookControllerTest.class);
 		suite.addTestSuite(test.controller.AddressbookSaverTest.class);
+		suite.addTestSuite(test.AddressbookModelTest.class);
+
 		//$JUnit-END$
 		return suite;
 	}
