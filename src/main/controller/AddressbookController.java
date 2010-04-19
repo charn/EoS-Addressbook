@@ -40,32 +40,31 @@ public class AddressbookController {
 	}
 	
 	public void fireFirstNameChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withFirstName(newValue));
-		updateView();
+		updateItem(contact, contact.withFirstName(newValue));
 	}
 	
 	public void fireLastNameChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withLastName(newValue));
-		updateView();
+		updateItem(contact, contact.withLastName(newValue));
 	}
 	
 	public void fireNicknameChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withNickname(newValue));
-		updateView();
+		updateItem(contact, contact.withNickname(newValue));
 	}
 
 	public void firePhoneNumberChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withPhoneNumber(newValue));
-		updateView();
+		updateItem(contact, contact.withPhoneNumber(newValue));
 	}
 	
 	public void fireAddressChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withAddress(newValue));
-		updateView();
+		updateItem(contact, contact.withAddress(newValue));
 	}
 	
 	public void fireEmailChanged(AddressbookItem contact, String newValue) {
-		model.updateItem(contact, contact.withEmail(newValue));
+		updateItem(contact, contact.withEmail(newValue));
+	}
+	
+	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
+		model.updateItem(existing, updated);
 		updateView();
 	}
 	
