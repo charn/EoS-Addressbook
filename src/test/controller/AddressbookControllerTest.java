@@ -179,7 +179,6 @@ public class AddressbookControllerTest extends TestCase{
 	public void test_viewAndModelAreInSyncAfterEditingFields() {
 		int editedItemRow = 0;
 		String newValue = "AsDf12345";
-		AddressbookItem editedItem = view.itemsList.get(editedItemRow);
 		
 		// Firstname
 		controller.fireFirstNameChanged(view.itemsList.get(editedItemRow), newValue);
@@ -231,6 +230,7 @@ public class AddressbookControllerTest extends TestCase{
 		assertEquals(model.get(1), PETTERI);
 
 		assertEquals(model.search(query).size(),1);
+		assertTrue(model.search(query).contains(PETTERI));
 		
 		//Petterin pitäisi poistua
 		controller.removeItem(0);
