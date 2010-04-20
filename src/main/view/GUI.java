@@ -9,10 +9,14 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import main.controller.AddressbookController;
 import main.model.AddressbookItem;
@@ -40,6 +44,8 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 	private JButton addButton;
 	private JButton removeButton;
+	
+	private JTextField searchField;
 
 	private AddressbookController controller;
 
@@ -58,14 +64,20 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 		addButton = new JButton("Add");
 		removeButton = new JButton("Remove");
-
+		searchField = new JTextField();
+		
 		addButton.addActionListener(this);
 		removeButton.addActionListener(this);
-
+		
 		toolBar.add(addButton);
 		toolBar.add(removeButton);
-
-		// Lisätään työkalupalkki sisältöpaneeliin
+		
+		toolBar.add(new JLabel("Search"));
+		toolBar.add(searchField);
+		setSearchFieldListener();
+		
+		
+		//Lisätään työkalupalkki sisältöpaneeliin
 		contentPane.add(toolBar, BorderLayout.PAGE_START);
 
 		// Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
@@ -103,12 +115,28 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 			}
 
 		};
-
 		contactInfoTable.setAutoCreateRowSorter(true);
-
 		return contactInfoTable;
 	}
 
+	
+	private void setSearchFieldListener() {
+		searchField.getDocument().addDocumentListener(new DocumentListener(){
+			public void changedUpdate(DocumentEvent e) {
+				onDocumentChanged(e);
+			}
+			public void insertUpdate(DocumentEvent e) {
+				onDocumentChanged(e);
+			}
+			public void removeUpdate(DocumentEvent e) {
+				onDocumentChanged(e);
+			}
+			public void onDocumentChanged(DocumentEvent e) {
+				controller.fireSearchKeywordsEntered(searchField.getText());
+			}
+		});
+	}
+	
 	public void updateAddressbook(List<AddressbookItem> model) {
 		tableModel.updateAddressbook(model);
 
