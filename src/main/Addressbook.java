@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.util.List;
 
 import main.controller.AddressbookController;
@@ -17,7 +18,7 @@ import static test.TestDummies.*;
 public class Addressbook {
 	
 	public static final String DEFAULT_FILE_FOR_SERIALIZED_ADDRESSBOOKITEMLIST = 
-											"data\\Addressbook.ser";
+											"data" + File.pathSeparator + "Addressbook.ser";
 
 	public static void main(String[] args) {
 

@@ -1,5 +1,6 @@
 package test.controller;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,10 +34,10 @@ public class AddressbookSaverTest extends TestCase{
 		assertSame(itemList.get(0), test.TestDummies.ESA);
 		assertSame(itemList.get(1), test.TestDummies.JORMA);
 		
-		AddressbookSaver.saveAddressbookItemListToFile(itemList, "testdata\\esajorma.ser");
+		AddressbookSaver.saveAddressbookItemListToFile(itemList, "testdata" + File.pathSeparator + "esajorma.ser");
 		
 		List<AddressbookItem> itemListFromFile =
-				AddressbookSaver.openAddressbookItemListFromFile("testdata\\esajorma.ser");
+				AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.pathSeparator + "esajorma.ser");
 		
 		//Verrataan että tiedostosta haettujen itemien String-esitykset ovat samat
 		//kuin tiedostoon talletettujen
@@ -48,7 +49,7 @@ public class AddressbookSaverTest extends TestCase{
 	@Test
 	public void testOpeningFileThatDoesNotExist(){
 		List<AddressbookItem> itemListFromFile =
-			AddressbookSaver.openAddressbookItemListFromFile("testdata\\shouldNotExist.ser");
+			AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.pathSeparator + "shouldNotExist.ser");
 		assertNull(itemListFromFile);
 	}
 }
