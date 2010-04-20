@@ -34,10 +34,10 @@ public class AddressbookSaverTest extends TestCase{
 		assertSame(itemList.get(0), test.TestDummies.ESA);
 		assertSame(itemList.get(1), test.TestDummies.JORMA);
 		
-		AddressbookSaver.saveAddressbookItemListToFile(itemList, "testdata" + File.pathSeparator + "esajorma.ser");
+		AddressbookSaver.saveAddressbookItemListToFile(itemList, "testdata" + File.separator + "esajorma.ser");
 		
 		List<AddressbookItem> itemListFromFile =
-				AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.pathSeparator + "esajorma.ser");
+				AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.separator + "esajorma.ser");
 		
 		//Verrataan että tiedostosta haettujen itemien String-esitykset ovat samat
 		//kuin tiedostoon talletettujen
@@ -49,7 +49,7 @@ public class AddressbookSaverTest extends TestCase{
 	@Test
 	public void testOpeningFileThatDoesNotExist(){
 		List<AddressbookItem> itemListFromFile =
-			AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.pathSeparator + "shouldNotExist.ser");
+			AddressbookSaver.openAddressbookItemListFromFile("testdata" + File.separator + "shouldNotExist.ser");
 		assertNull(itemListFromFile);
 	}
 }
