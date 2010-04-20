@@ -9,17 +9,22 @@ public class AddressbookSearch {
 	// Pilkut ja välilyönnit erottimina
 	private static final Pattern QUERYSPLITPATTERN = Pattern.compile("[,\\s]+");
 	
-	
+	/**
+	 * Etsii annetusta listasta hakuehtoja vastaavat alkiot.
+	 * @param items Lista josta etsitään hakuehtoja vastaavia alkioita.
+	 * @param query Hakuehdot erotellaan tästä pilkun ja välilyönnin mukaan.
+	 * @return Palauttaa listan, joka sisältää hakuehtoja vastaavat alkiot.
+	 */
 	public static List<AddressbookItem> search(List<AddressbookItem> items, String query) {
 		String queryStrings[] = splitQuery(query);
 		List<AddressbookItem> searchResult = new LinkedList<AddressbookItem>();
-		
+
 		for (AddressbookItem item : items) {
-			if (matchesKeywords(item,queryStrings)) {
+			if (matchesKeywords(item, queryStrings)) {
 				searchResult.add(item);
 			}
 		}
-		
+
 		return searchResult;
 	}
 	
@@ -29,6 +34,7 @@ public class AddressbookSearch {
 	
 	private static boolean matchesKeywords(AddressbookItem item, String[] keywords) {
 		String[] needles = stringArrayToLowerCase(keywords);
+		
 		String[] haystack = new String[] {
 				item.getFirstName(),
 				item.getLastName(),
@@ -37,6 +43,7 @@ public class AddressbookSearch {
 				item.getPhoneNumber(),
 				item.getAddress()
 		};
+		
 		haystack = stringArrayToLowerCase(haystack);
 	
 		for (String needle : needles) {
@@ -49,8 +56,10 @@ public class AddressbookSearch {
 	
 	private static String[] stringArrayToLowerCase(String[] array) {
 		String[] newArray = new String[array.length];
+		
 		for (int i = 0; i < array.length; ++i)
 			newArray[i] = array[i].toLowerCase();
+		
 		return newArray;
 	}
 	
