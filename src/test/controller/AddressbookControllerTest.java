@@ -109,7 +109,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newName = "Keijo";
 		int editedItemRow = 0;
 		
-		controller.fireFirstNameChanged(JORMA, newName);
+		controller.fireFirstNameChanged(view.itemsList.get(editedItemRow), newName);
 		
 		assertEquals(view.itemsList.get(editedItemRow).getFirstName(), newName);
 		assertEquals(view.numberOfUpdates, 2);
@@ -121,7 +121,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newValue = "Keijo";
 		int editedItemRow = 0;
 		
-		controller.fireLastNameChanged(JORMA, newValue);
+		controller.fireLastNameChanged(view.itemsList.get(editedItemRow), newValue);
 		
 		assertEquals(view.itemsList.get(editedItemRow).getLastName(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
@@ -133,7 +133,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newValue = "";
 		int editedItemRow = 0;
 		
-		controller.firePhoneNumberChanged(JORMA, newValue);
+		controller.firePhoneNumberChanged(view.itemsList.get(editedItemRow), newValue);
 
 		assertEquals(view.itemsList.get(editedItemRow).getPhoneNumber(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
@@ -145,7 +145,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newValue = "Katu 321";
 		int editedItemRow = 0;
 		
-		controller.fireAddressChanged(JORMA, newValue);
+		controller.fireAddressChanged(view.itemsList.get(editedItemRow), newValue);
 
 		assertEquals(view.itemsList.get(editedItemRow).getAddress(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
@@ -157,7 +157,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newValue = "asdf@asdf.com";
 		int editedItemRow = 0;
 		
-		controller.fireEmailChanged(JORMA, newValue);
+		controller.fireEmailChanged(view.itemsList.get(editedItemRow), newValue);
 
 		assertEquals(view.itemsList.get(editedItemRow).getEmail(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
@@ -169,7 +169,7 @@ public class AddressbookControllerTest extends TestCase{
 		String newValue = "Jortsu";
 		int editedItemRow = 0;
 		
-		controller.fireNicknameChanged(JORMA, newValue);
+		controller.fireNicknameChanged(view.itemsList.get(editedItemRow), newValue);
 
 		assertEquals(view.itemsList.get(editedItemRow).getNickname(), newValue);
 		assertEquals(view.numberOfUpdates, 2);
