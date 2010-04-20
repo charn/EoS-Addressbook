@@ -16,7 +16,7 @@ public class AddressbookController {
 	private AddressbookView view;
 	
 	private String searchKeywords = "";
-	private List<AddressbookItem> searchResult = new ArrayList<AddressbookItem>();
+	private List<AddressbookItem> items = new ArrayList<AddressbookItem>();
 	
 	public AddressbookController (AddressbookModel model) {
 		this.model = model;
@@ -24,21 +24,21 @@ public class AddressbookController {
 
 	public void addItem(AddressbookItem item) {
 		model.add(item);
-		searchResult.add(item);
+		items.add(item);
 		updateView();
 	}
 
 	public void removeItem(int row) {
 		if (row >= 0) {
-			AddressbookItem item = this.searchResult.get(row);
+			AddressbookItem item = this.items.get(row);
 			model.remove(item);
-			searchResult.remove(searchResult.indexOf(item));
+			items.remove(items.indexOf(item));
 			updateView();
 		}
 	}
 
 	private void updateView() {
-		view.updateAddressbook(Collections.unmodifiableList(this.searchResult));
+		view.updateAddressbook(Collections.unmodifiableList(this.items));
 	}
 	
 	public void setView(AddressbookView view) {
@@ -52,7 +52,7 @@ public class AddressbookController {
 	}
 	
 	private void doSearch() {
-		this.searchResult = model.search(searchKeywords);
+		this.items = model.search(searchKeywords);
 		updateView();
 	}
 	
@@ -82,7 +82,7 @@ public class AddressbookController {
 	
 	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
 		model.updateItem(existing, updated);
-		searchResult.set(searchResult.indexOf(existing), updated);
+		items.set(items.indexOf(existing), updated);
 		updateView();
 	}
 	
