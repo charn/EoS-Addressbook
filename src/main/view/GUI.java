@@ -66,15 +66,13 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		removeButton = new JButton("Remove");
 		searchField = new JTextField();
 		
-		addButton.addActionListener(this);
-		removeButton.addActionListener(this);
-		
 		toolBar.add(addButton);
 		toolBar.add(removeButton);
 		
 		toolBar.add(new JLabel("Search"));
 		toolBar.add(searchField);
-		setSearchFieldListener();
+		
+		setListeners();
 		
 		
 		//Lisätään työkalupalkki sisältöpaneeliin
@@ -120,17 +118,14 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	}
 
 	
-	private void setSearchFieldListener() {
-		searchField.getDocument().addDocumentListener(new DocumentListener(){
-			public void changedUpdate(DocumentEvent e) {
-				onDocumentChanged(e);
-			}
-			public void insertUpdate(DocumentEvent e) {
-				onDocumentChanged(e);
-			}
-			public void removeUpdate(DocumentEvent e) {
-				onDocumentChanged(e);
-			}
+	/**
+	 * Asettaa kuuntelijat kaikille objekteille, joita tulee kuunnella.
+	 */
+	private void setListeners() {
+		addButton.addActionListener(this);
+		removeButton.addActionListener(this);
+		
+		searchField.getDocument().addDocumentListener(new DocumentChangeListener(){
 			public void onDocumentChanged(DocumentEvent e) {
 				controller.fireSearchKeywordsEntered(searchField.getText());
 			}
@@ -142,26 +137,11 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == addButton) {
-			// AddDialog dialog = new AddDialog(this, controller);
-			// dialog.pack();
-			//                     
-			// dialog.setLocationRelativeTo(this);
-			// dialog.setVisible(true);
-
-			controller.addItem(new AddressbookItem());
-			// int addedRow =
-			// contactInfoTable.convertRowIndexToModel(tableModel.getRowCount()
-			// - 1);
-
-			// System.out.println(addedRow);
-
-			// contactInfoTable.changeSelection(addedRow, 0, true, false);
-			// contactInfoTable.editCellAt(addedRow, 0);
-			contactInfoTable.requestFocusInWindow();
-		}
+  public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == addButton) {
+            controller.addItem(new AddressbookItem());
+            contactInfoTable.requestFocusInWindow();
+  }
 
 		else if (e.getSource() == removeButton) {
 			int selectedRow = contactInfoTable.getSelectedRow();
