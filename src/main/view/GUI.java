@@ -16,8 +16,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import main.controller.AddressbookController;
 import main.model.AddressbookItem;
 
@@ -95,24 +93,8 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	public JTable initContactInfoTable() {
 		tableModel = new ContactInfoTableModel(this.controller);
 
-		contactInfoTable = new JTable(tableModel) {
-
-			// Implement table cell tool tips.
-			public String getToolTipText(MouseEvent e) {
-				String tip = null;
-				java.awt.Point p = e.getPoint();
-				int rowIndex = rowAtPoint(p);
-
-				tip = getValueAt(rowIndex, 0) + ", " + getValueAt(rowIndex, 1)
-						+ ", " + getValueAt(rowIndex, 2) + ", "
-						+ getValueAt(rowIndex, 3) + ", "
-						+ getValueAt(rowIndex, 4) + ", "
-						+ getValueAt(rowIndex, 5);
-
-				return tip;
-			}
-
-		};
+		contactInfoTable = new AddressbookJTable(tableModel);
+		
 		contactInfoTable.setAutoCreateRowSorter(true);
 		return contactInfoTable;
 	}
