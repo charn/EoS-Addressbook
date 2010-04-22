@@ -9,8 +9,6 @@ import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 import main.view.GUI;
 
-import static test.TestDummies.*;
-
 /**
  * Main class.
  *
@@ -36,12 +34,6 @@ public class Addressbook {
 					model = new AddressbookModel();
 				else
 					model = new AddressbookModel(startItemList);
-				
-				//Jouduin laittamaan tähän rumasti testidataa /////////
-				/*model.add(ESA);
-				model.add(JORMA);
-				model.add(PETTERI);*/
-				/////////// testidata loppuu //////////////////
 
 				AddressbookController controller = new AddressbookController(model);
 				
