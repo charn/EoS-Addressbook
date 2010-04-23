@@ -25,7 +25,7 @@ public class MainMenuBar extends JMenuBar
 	private AddressbookController controller;
 	
 	JFrame parent = null;
- 	  String[] fileItems = new String[] { "New", "Open", "Save", "Exit" };
+ 	  String[] fileItems = new String[] { /* "New", "Open", */ "Save", "Exit" };
 	  String[] editItems = new String[] { "Undo", "Cut", "Copy", "Paste" };
 	  char[] fileShortcuts = { 'N', 'O', 'S', 'X' };
 	  char[] editShortcuts = { 'Z', 'X', 'C', 'V' };
@@ -65,7 +65,10 @@ public class MainMenuBar extends JMenuBar
 	    editMenu.insertSeparator(1);
 	    //  Finally, add all the menus to the menu bar
 	    add(fileMenu);
-	    add(editMenu);
+	    
+//	    Pistetään sitten kun tarvitaan
+//	    add(editMenu);
+	    
 	}//MainMenuBar
 
 }
