@@ -41,7 +41,8 @@ public class AddressbookSearch {
 				item.getEmail(),
 				item.getNickname(),
 				item.getPhoneNumber(),
-				item.getAddress()
+				item.getAddress(),
+				item.getTags()
 		};
 		
 		haystack = stringArrayToLowerCase(haystack);
