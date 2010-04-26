@@ -80,6 +80,10 @@ public class AddressbookController {
 		updateItem(contact, contact.withEmail(newValue));
 	}
 	
+	public void fireTagsChanged(AddressbookItem contact, String newValue) {
+		updateItem(contact, contact.withTags(newValue));
+	}
+	
 	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
 		model.updateItem(existing, updated);
 		items.set(items.indexOf(existing), updated);
@@ -91,4 +95,5 @@ public class AddressbookController {
 		String fileName = Addressbook.DEFAULT_FILE_FOR_SERIALIZED_ADDRESSBOOKITEMLIST;
 		AddressbookSaver.saveAddressbookItemListToFile(itemList, fileName);
 	}
+
 }

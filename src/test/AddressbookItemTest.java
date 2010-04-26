@@ -29,6 +29,7 @@ public class AddressbookItemTest extends TestCase{
 		assertEquals(item.getEmail(), "");
 		assertEquals(item.getPhoneNumber(), "");
 		assertEquals(item.getAddress(), "");
+		assertEquals(item.getTags(), "");
 	}
 	
 	@Test
@@ -50,6 +51,9 @@ public class AddressbookItemTest extends TestCase{
 		
 		seppo = ESA.withAddress("Katu 123");
 		assertNotSame(ESA, seppo);
+		
+		seppo = ESA.withTags("työ");
+		assertNotSame(ESA, seppo);
 	}
 	
 	@Test
@@ -64,6 +68,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
 		
 		// Lastname
 		seppo = ESA.withLastName("Seppola");
@@ -75,6 +80,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
 		
 		// Nickname
 		seppo = ESA.withNickname("Sepi");
@@ -85,6 +91,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
 		
 		// Email
 		seppo = ESA.withEmail("asdf@asdf.fi");
@@ -96,6 +103,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
 		
 		// PhoneNumber
 		seppo = ESA.withPhoneNumber("12345");
@@ -107,6 +115,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
 		
 		// Address
 		seppo = ESA.withAddress("Katu 123");
@@ -118,6 +127,25 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		
+		// Tags
+		seppo = ESA.withTags("työ");
+		
+		assertEquals(seppo.getTags(), "työ");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getTags().equals(ESA.getTags()));
+	}
+	
+	@Test
+	public void testToString() {
+		assertTrue(ESA.toString().equals(
+				"Esa, Meikäläinen, Esku, maija@gmail.com, 050 445533, Mannerheimintie 10 A 4, työ"));
 	}
 
 }

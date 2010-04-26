@@ -14,8 +14,7 @@ import java.awt.event.*;
 @SuppressWarnings("serial")
 
 /*
- * HUOM! Tästä luokasta puuttuu nickname-kenttään liittyvät jutut. Jos tämä luokka otetaan
- * taas käyttöön niin ne pitäisi lisätä. 
+ * HUOM! Tämä luokka ei ole käytössä!
  */
 class AddDialog extends JDialog implements ActionListener,
 		PropertyChangeListener {

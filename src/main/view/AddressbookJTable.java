@@ -23,7 +23,8 @@ public class AddressbookJTable extends JTable {
 				+ ", " + getValueAt(rowIndex, 2) + ", "
 				+ getValueAt(rowIndex, 3) + ", "
 				+ getValueAt(rowIndex, 4) + ", "
-				+ getValueAt(rowIndex, 5);
+				+ getValueAt(rowIndex, 5) + ", "
+				+ getValueAt(rowIndex, 6);
 
 		return tip;
 	}

@@ -176,6 +176,18 @@ public class AddressbookControllerTest extends TestCase{
 	}
 	
 	@Test
+	public void test_ContactTagsIsChanged() {
+		
+		String newValue = "duuni";
+		int editedItemRow = 0;
+		
+		controller.fireTagsChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getTags(), newValue);
+		assertEquals(view.numberOfUpdates, 2);
+	}
+	
+	@Test
 	public void test_viewAndModelAreInSyncAfterEditingFields() {
 		int editedItemRow = 0;
 		String newValue = "AsDf12345";
@@ -212,6 +224,12 @@ public class AddressbookControllerTest extends TestCase{
 
 		// Address
 		controller.fireAddressChanged(view.itemsList.get(editedItemRow), newValue);
+
+		assertTrue(model.getItemsList().containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.getItemsList()));
+		
+		// Address
+		controller.fireTagsChanged(view.itemsList.get(editedItemRow), newValue);
 
 		assertTrue(model.getItemsList().containsAll(view.itemsList));
 		assertTrue(view.itemsList.containsAll(model.getItemsList()));

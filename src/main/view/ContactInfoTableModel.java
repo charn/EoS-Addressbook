@@ -29,7 +29,8 @@ public class ContactInfoTableModel extends AbstractTableModel {
 									"Nickname",
 									"Email",
 									"Phone number",
-									"Address"};
+									"Address",
+									"Tags"};
 	
 	public ContactInfoTableModel(AddressbookController controller) {
 		this.itemsList = new ArrayList<AddressbookItem>();
@@ -65,6 +66,7 @@ public class ContactInfoTableModel extends AbstractTableModel {
 				item.getEmail(),
 				item.getPhoneNumber(),
 				item.getAddress(),
+				item.getTags()
 				
         };
         return columns[column];
@@ -92,6 +94,9 @@ public class ContactInfoTableModel extends AbstractTableModel {
 				break;
 			case 5:
 				controller.fireAddressChanged(item, newValue);
+				break;
+			case 6:
+				controller.fireTagsChanged(item, newValue);
 				break;
 			default:
 				System.out.println("Not implemented.");
