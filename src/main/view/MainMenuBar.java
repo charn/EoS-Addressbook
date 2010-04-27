@@ -12,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import main.controller.AddressbookController;
+import main.controller.CSVFileHandler;
 
 /**
  * @author toittine
@@ -25,10 +26,10 @@ public class MainMenuBar extends JMenuBar
 	private AddressbookController controller;
 	
 	JFrame parent = null;
- 	  String[] fileItems = new String[] { /* "New", "Open", */ "Save", "Exit" };
-	  String[] editItems = new String[] { "Undo", "Cut", "Copy", "Paste" };
+ 	  String[] fileItems = new String[] { "Save", "Exit" };
+	  String[] editItems = new String[] { "Import", "Export" };
 	  char[] fileShortcuts = { 'N', 'O', 'S', 'X' };
-	  char[] editShortcuts = { 'Z', 'X', 'C', 'V' };
+	  char[] editShortcuts = { 'I', 'E' };
 
 	/**
 	 * 
@@ -38,7 +39,7 @@ public class MainMenuBar extends JMenuBar
 		this.controller = controller;
 		
 	    JMenu fileMenu = new JMenu("File");
-	    JMenu editMenu = new JMenu("Edit");
+	    JMenu editMenu = new JMenu("Items");
 
 	    parent = pf;
 	    
@@ -47,12 +48,19 @@ public class MainMenuBar extends JMenuBar
 	    {
 	      public void actionPerformed(ActionEvent event) 
 	      {
+	  		CSVFileHandler csv = null;
 	    	String cmd = event.getActionCommand();
-	    	if (cmd.equals("Save"))
+	        
+	    	System.out.println("Menu item [" + cmd + "] was pressed.");
+
+	        if (cmd.equals("Save"))
 	    		controller.saveModelToFile();
-	        System.out.println("Menu item [" + cmd + "] was pressed.");
-	        if (cmd.equals ("Exit")) 
+	        else if (cmd.equals ("Exit")) 
 	        	System.exit(0);
+	        else if (cmd.equals ("Import")) 
+	        	csv = new CSVFileHandler(parent, cmd, controller);
+	        else if (cmd.equals ("Export")) 
+	        	csv = new CSVFileHandler(parent, cmd, controller);
 	      }
 	    };
 	    for (int i = 0; i < fileItems.length; i++) 
@@ -61,13 +69,17 @@ public class MainMenuBar extends JMenuBar
 	      item.addActionListener(printListener);
 	      fileMenu.add(item);
 	    }//for
-	    //  Insert a separator in the Edit Menu in Position 1 after "Undo"
-	    editMenu.insertSeparator(1);
+	    for (int i = 0; i < editItems.length; i++) 
+	    {
+	      JMenuItem item = new JMenuItem(editItems[i], editShortcuts[i]);
+	      item.addActionListener(printListener);
+	      editMenu.add(item);
+	    }//for
+	    //  Insert a separator in the File Menu in Position 1 after "Save"
+	    fileMenu.insertSeparator(1);
 	    //  Finally, add all the menus to the menu bar
 	    add(fileMenu);
-	    
-//	    Pistetään sitten kun tarvitaan
-//	    add(editMenu);
+	    add(editMenu);
 	    
 	}//MainMenuBar
 

@@ -96,4 +96,9 @@ public class AddressbookController {
 		AddressbookSaver.saveAddressbookItemListToFile(itemList, fileName);
 	}
 
+	public List<AddressbookItem> getItems()
+	{
+		return items;
+	}
+
 }
