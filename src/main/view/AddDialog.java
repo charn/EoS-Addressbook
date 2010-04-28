@@ -122,9 +122,14 @@ class AddDialog extends JDialog implements ActionListener,
 			optionPane.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
 			if (buttonEnter.equals(value)) {
-				controller.addItem(new AddressbookItem(firstNameTextField
-						.getText(), lastNameTextField.getText(), "", emailTextField.getText(), phoneNumberTextField.getText(),
-						addressTextField.getText()));
+				controller.addItem(new AddressbookItem(
+						firstNameTextField.getText(),
+						lastNameTextField.getText(),
+						"", // nickname
+						emailTextField.getText(),
+						phoneNumberTextField.getText(),
+						addressTextField.getText(),
+						"")); // tags
 				
 				clearAndHide();
 

@@ -5,8 +5,6 @@ package main.controller;
 
 import javax.swing.JFrame;
 
-import sun.tools.tree.NewInstanceExpression;
-
 import java.awt.FileDialog;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -46,7 +44,7 @@ public class CSVFileHandler
 			return;
 		
 		FileDialog fd = new FileDialog ( jframe, "EoS Addressbook " + cmd, purpose ) ; 
-		fd.show() ; 
+		fd.setVisible(true); 
 		String filename = fd.getFile();
 		String directory = fd.getDirectory();
 		String realname = directory + filename;
