@@ -257,4 +257,21 @@ public class AddressbookControllerTest extends TestCase{
 		
 		assertTrue(lista.contains(JORMA));
 	}
+	
+	@Test
+	public void test_NoTagsSelectedReturnsSearchWholeResult() {
+		controller.fireSearchKeywordsEntered("");
+		controller.fireSelectedTagsChanged(new String[]{});
+		
+		assertTrue(model.search("").containsAll(view.itemsList));
+		assertTrue(view.itemsList.containsAll(model.search("")));
+	}
+	
+	@Test
+	public void test_OneTagIsSelectedSearchResultContainsOnlyThisTag() {
+		controller.fireSelectedTagsChanged(new String[]{JORMA.getTags()});
+		
+		assertTrue(view.itemsList.contains(JORMA));
+		assertFalse(view.itemsList.contains(PETTERI));
+	}
 }

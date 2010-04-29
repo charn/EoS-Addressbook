@@ -65,7 +65,7 @@ public class AddressbookModel {
 	}
 	
 	public List<AddressbookItem> search(String query) {
-		return AddressbookSearch.search(items, query);
+		return AddressbookSearch.searchWithKeywords(items, query);
 	}
 	
 }
