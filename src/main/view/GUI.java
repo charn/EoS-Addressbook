@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -58,10 +59,12 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	private JPanel tagPanel;
 
 	private HashSet<String> selectedTags;
+	private TreeMap<String, JCheckBox> checkboxes;
 	
 	public GUI(AddressbookController controller) {
 
 		selectedTags = new HashSet<String>();
+		checkboxes = new TreeMap<String, JCheckBox>();
 		
 		this.controller = controller;
 
@@ -193,41 +196,65 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 	}
 
-	@Override
 	public void updateTags(List<String> tags) {
 		tagPanel.removeAll();
+		
+		TreeMap<String, JCheckBox> updatedCB = new TreeMap<String, JCheckBox>();
+		
 		for (String tag : tags) {
-			JCheckBox cb = new JCheckBox(tag);
-			tagPanel.add(cb);
-			cb.addItemListener(new ItemListener(){
+			if (checkboxes.containsKey(tag)) {
+				updatedCB.put(tag, checkboxes.remove(tag));
+			}
+			else {
+				JCheckBox newCB = new JCheckBox(tag);
+				
+				newCB.addItemListener(new ItemListener() {
 
-				public void itemStateChanged(ItemEvent e) {
-					
-					JCheckBox c = (JCheckBox) e.getSource();
-					String t = c.getText();
-					
-					if (e.getStateChange() == ItemEvent.SELECTED) {
-						selectedTags.add(t);
-					}
-					else {
-						selectedTags.remove(t);
-					}
-					
-					String[] st = new String[selectedTags.size()];
-					
-					int i = 0;
-					for (String tagi : selectedTags) {
-						st[i] = tagi;
-						++i;
-					}
-					
-					controller.fireSelectedTagsChanged(st);
-					
-				}});
+					public void itemStateChanged(ItemEvent arg0) {
+						selectedCheckBoxesChanged();
+					}});
+				
+				updatedCB.put(tag, newCB);
+			}
+		}
+		
+		for (JCheckBox cb : checkboxes.values()) {
+			if (cb.isSelected()) {
+				cb.doClick();
+			}
+		}
+		
+		this.checkboxes = updatedCB;
+
+		for (JCheckBox cb : updatedCB.values()) {
+			tagPanel.add(cb);
 		}
 		
 		tagPanel.updateUI();
 		
+	}
+	
+	private void selectedCheckBoxesChanged() {
+		String[] st = makeSelectedArray(); 
+		controller.fireSelectedTagsChanged(st);
+	}
+	
+	private String[] makeSelectedArray() {
+		List<String> selectedList = new LinkedList<String>();
+		
+		for (JCheckBox cb : checkboxes.values()) {
+			if (cb.isSelected()) {
+				selectedList.add(cb.getText());
+			}
+		}
+		
+		String[] selectedListStrings = new String[selectedList.size()];
+		
+		for (int i = 0; i < selectedListStrings.length; ++i) {
+			selectedListStrings[i] = selectedList.get(i);
+		}
+		
+		return selectedListStrings;
 	}
 
 }
