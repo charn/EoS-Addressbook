@@ -13,4 +13,10 @@ public class TestDummies {
 	public static final AddressbookItem PETTERI = new AddressbookItem("Petteri",
 			"Virtanen", "Petsku", "pvirtanen@gmail.com", "040 234234", 
 			"Kitarakuja 7 A 5", "sukulainen");
+	public static final AddressbookItem SEPPO = new AddressbookItem("Seppo",
+			"Taalasmaa", "Sepi", "seppo@talotaikurit.com", "040 91928384", 
+			"Kitarakuja 7 A 5", "sukulainen, työ kaveri");
+	public static final AddressbookItem ISMO = new AddressbookItem("Ismo",
+			"Laitela", "", "ismo@talotaikurit.com", "040 91928384", 
+			"Kitarakuja 7 A 5", "");
 }
