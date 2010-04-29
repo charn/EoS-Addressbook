@@ -41,6 +41,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 	private JButton addButton;
 	private JButton removeButton;
+	private JButton addPictureButton;
 	
 	private JTextField searchField;
 
@@ -61,10 +62,12 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 
 		addButton = new JButton("Add");
 		removeButton = new JButton("Remove");
+		addPictureButton = new JButton("Add pic");
 		searchField = new JTextField();
 		
 		toolBar.add(addButton);
 		toolBar.add(removeButton);
+		toolBar.add(addPictureButton);
 		
 		toolBar.add(new JLabel("Search"));
 		toolBar.add(searchField);
@@ -105,6 +108,7 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	private void setListeners() {
 		addButton.addActionListener(this);
 		removeButton.addActionListener(this);
+		addPictureButton.addActionListener(this);
 		
 		searchField.getDocument().addDocumentListener(new DocumentChangeListener(){
 			public void onDocumentChanged(DocumentEvent e) {
@@ -142,6 +146,10 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 						.convertRowIndexToModel(selectedRow);
 				controller.removeItem(delete);
 
+			}
+			
+			else if (e.getSource() == addPictureButton) {
+				System.out.println("ASDF");
 			}
 
 			if (nextToBeSelected != -1)
