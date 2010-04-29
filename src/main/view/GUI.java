@@ -2,15 +2,23 @@ package main.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -46,9 +54,15 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	private JTextField searchField;
 
 	private AddressbookController controller;
+	
+	private JPanel tagPanel;
 
+	private HashSet<String> selectedTags;
+	
 	public GUI(AddressbookController controller) {
 
+		selectedTags = new HashSet<String>();
+		
 		this.controller = controller;
 
 		setTitle("Addressbook");
@@ -74,14 +88,28 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		
 		setListeners();
 		
-		
 		//Lisätään työkalupalkki sisältöpaneeliin
 		contentPane.add(toolBar, BorderLayout.PAGE_START);
+ 
+		//Lisätään tägeille oma paneeli
+		this.tagPanel = new JPanel(new GridLayout(0, 1));
+		JScrollPane tagJScrollPane = new JScrollPane(tagPanel);
 
+		JPanel rightside = new JPanel(new BorderLayout());
+
+		rightside.add(new JLabel("Tags:"),BorderLayout.PAGE_START);
+		rightside.add(tagJScrollPane,BorderLayout.CENTER);
+		
 		// Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
-		JScrollPane scrollPane = new JScrollPane(initContactInfoTable());
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+		JScrollPane leftside = new JScrollPane(initContactInfoTable());
 
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				leftside, rightside);
+		
+		splitPane.setDividerLocation(500);
+		
+		contentPane.add(splitPane, BorderLayout.CENTER);
+		
 		setResizable(true);
 		setMinimumSize(new Dimension(300, 300));
 		setContentPane(contentPane);
@@ -91,6 +119,12 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		setJMenuBar(new MainMenuBar(this, controller));
 
 	}
+	
+//	private static void addAButton(String text, Container container) {
+//        JButton button = new JButton(text);
+//        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        container.add(button);
+//    }
 
 	public JTable initContactInfoTable() {
 		tableModel = new ContactInfoTableModel(this.controller);
@@ -157,6 +191,43 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 						false);
 		}
 
+	}
+
+	@Override
+	public void updateTags(List<String> tags) {
+		tagPanel.removeAll();
+		for (String tag : tags) {
+			JCheckBox cb = new JCheckBox(tag);
+			tagPanel.add(cb);
+			cb.addItemListener(new ItemListener(){
+
+				public void itemStateChanged(ItemEvent e) {
+					
+					JCheckBox c = (JCheckBox) e.getSource();
+					String t = c.getText();
+					
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						selectedTags.add(t);
+					}
+					else {
+						selectedTags.remove(t);
+					}
+					
+					String[] st = new String[selectedTags.size()];
+					
+					int i = 0;
+					for (String tagi : selectedTags) {
+						st[i] = tagi;
+						++i;
+					}
+					
+					controller.fireSelectedTagsChanged(st);
+					
+				}});
+		}
+		
+		tagPanel.updateUI();
+		
 	}
 
 }

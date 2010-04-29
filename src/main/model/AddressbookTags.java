@@ -22,12 +22,19 @@ public class AddressbookTags {
 	}
 	
 	public void updateTagsFromItems(List<AddressbookItem> items) {
+		
+		tags.clear();
+		
 		for(AddressbookItem item : items) {
-			String[] tags = splitStringWithPattern(item.getTags());
-			for (String tag : tags) {
-				if (tag != null && !tag.equals("")) {
-					this.tags.add(tag);
-				}
+			updateTagsFromItem(item);
+		}
+	}
+	
+	public void updateTagsFromItem(AddressbookItem item) {
+		String[] tags = splitStringWithPattern(item.getTags());
+		for (String tag : tags) {
+			if (tag != null && !tag.equals("")) {
+				this.tags.add(tag);
 			}
 		}
 	}

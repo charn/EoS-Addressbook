@@ -274,4 +274,46 @@ public class AddressbookControllerTest extends TestCase{
 		assertTrue(view.itemsList.contains(JORMA));
 		assertFalse(view.itemsList.contains(PETTERI));
 	}
+	
+	@Test
+	public void test_TwoTagsAreSelectedSearchResultContainsOnlyItemsThatHaveBothTags() {
+		model.add(SEPPO);
+		model.add(ESA);
+		model.add(ISMO);
+		
+		controller.fireSelectedTagsChanged(new String[]{"sukulainen","työ"});
+		
+		assertTrue(view.itemsList.contains(SEPPO));
+		assertFalse(view.itemsList.contains(ISMO));
+		assertFalse(view.itemsList.contains(JORMA));
+		assertFalse(view.itemsList.contains(PETTERI));
+		assertFalse(view.itemsList.contains(ESA));
+	}
+	
+	@Test
+	public void test_TagsGetUpdatedWhenTagsOnItemGetEdited() {
+		AddressbookItem item = view.itemsList.get(0);
+		controller.fireTagsChanged(item, "newtag");
+		
+		assertTrue(view.tags.contains("newtag"));
+	}
+	
+	@Test
+	public void test_TagsGetUpdatedWhenAddingItem() {
+		
+		controller.addItem(SEPPO);
+		
+		assertTrue(view.tags.contains("sukulainen"));
+		assertTrue(view.tags.contains("työ"));
+		assertTrue(view.tags.contains("kaveri"));
+		
+	}
+	
+	@Test
+	public void test_TagsGetUpdatedWhedRemovingItem() {
+		controller.removeItem(0); //JORMA
+		
+		assertTrue(view.tags.contains("sukulainen"));
+		assertFalse(view.tags.contains("työ"));
+	}
 }

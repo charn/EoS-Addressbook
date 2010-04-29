@@ -7,4 +7,5 @@ import main.model.AddressbookItem;
 public interface AddressbookView {
 
 	void updateAddressbook(List<AddressbookItem> items);
+	void updateTags(List<String> tags);
 }

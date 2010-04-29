@@ -9,6 +9,7 @@ import main.view.AddressbookView;
 import main.model.AddressbookItem;
 import main.model.AddressbookModel;
 import main.model.AddressbookSearch;
+import main.model.AddressbookTags;
 
 
 public class AddressbookController {
@@ -21,37 +22,60 @@ public class AddressbookController {
 	private List<AddressbookItem> tagSearchResult;
 	
 	private String selectedTags[];
+	private AddressbookTags tags;
 	
 	
 	public AddressbookController (AddressbookModel model) {
 		this.model = model;
+		
 		searchResult = new ArrayList<AddressbookItem>();
 		tagSearchResult = new ArrayList<AddressbookItem>();
-		selectedTags = new String[]{};
+		selectedTags = new String[0];
+		
+		tags = new AddressbookTags();
+		tags.updateTagsFromItems(model.getItemsList());
 	}
 
 	public void addItem(AddressbookItem item) {
 		model.add(item);
 		searchResult.add(item);
-		updateView();
+		tagSearchResult.add(item);
+		
+		tags.updateTagsFromItem(item);
+		
+		updateViewTags();
+		updateViewAddressbook();
+		
 	}
 
 	public void removeItem(int row) {
 		if (row >= 0) {
-			AddressbookItem item = this.searchResult.get(row);
+			AddressbookItem item = this.tagSearchResult.get(row);
 			model.remove(item);
+			
 			searchResult.remove(searchResult.indexOf(item));
-			updateView();
+			tagSearchResult.remove(tagSearchResult.indexOf(item));
+			
+			tags.updateTagsFromItems(model.getItemsList());
+			
+			updateViewTags();
+			updateViewAddressbook();
+			
 		}
 	}
 
-	private void updateView() {
+	private void updateViewAddressbook() {
 		view.updateAddressbook(Collections.unmodifiableList(this.tagSearchResult));
+	}
+	
+	private void updateViewTags() {
+		view.updateTags(tags.getTagsList());
 	}
 	
 	public void setView(AddressbookView view) {
 		this.view = view;
 		doSearch();
+		updateViewTags();
 	}
 	
 	public void fireSearchKeywordsEntered(String keywords) {
@@ -62,15 +86,18 @@ public class AddressbookController {
 	private void doSearch() {
 		this.searchResult = model.search(searchKeywords);
 		doTagsSearch();
-		updateView();
+		updateViewAddressbook();
 	}
 	
 	private void doTagsSearch() {
 		if (this.selectedTags.length > 0) {
 			this.tagSearchResult = AddressbookSearch.searchWithTags(this.searchResult, this.selectedTags);
 		}
-		else
-			this.tagSearchResult = this.searchResult;
+		else {
+			this.tagSearchResult.clear();
+			this.tagSearchResult.addAll(this.searchResult);
+		}
+			
 	}
 	
 	public void fireFirstNameChanged(AddressbookItem contact, String newValue) {
@@ -99,6 +126,8 @@ public class AddressbookController {
 	
 	public void fireTagsChanged(AddressbookItem contact, String newValue) {
 		updateItem(contact, contact.withTags(newValue));
+		this.tags.updateTagsFromItems(model.getItemsList());
+		updateViewTags();
 	}
 	
 	public void fireSelectedTagsChanged(String[] selectedTags) {
@@ -109,7 +138,8 @@ public class AddressbookController {
 	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
 		model.updateItem(existing, updated);
 		searchResult.set(searchResult.indexOf(existing), updated);
-		updateView();
+		tagSearchResult.set(tagSearchResult.indexOf(existing), updated);
+		updateViewAddressbook();
 	}
 	
 	public void saveModelToFile(){
