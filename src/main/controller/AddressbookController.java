@@ -17,6 +17,8 @@ public class AddressbookController {
 	private AddressbookModel model;
 	private AddressbookView view;
 	
+	private AddressbookSearch search;
+	
 	private String searchKeywords = "";
 	private List<AddressbookItem> searchResult;
 	private List<AddressbookItem> tagSearchResult;
@@ -27,6 +29,8 @@ public class AddressbookController {
 	
 	public AddressbookController (AddressbookModel model) {
 		this.model = model;
+		
+		search = new AddressbookSearch(AddressbookSearch.TAG_SEARCH_STYLE_AND);
 		
 		searchResult = new ArrayList<AddressbookItem>();
 		tagSearchResult = new ArrayList<AddressbookItem>();
@@ -91,7 +95,7 @@ public class AddressbookController {
 	
 	private void doTagsSearch() {
 		if (this.selectedTags.length > 0) {
-			this.tagSearchResult = AddressbookSearch.searchWithTags(this.searchResult, this.selectedTags);
+			this.tagSearchResult = search.searchWithTags(this.searchResult, this.selectedTags);
 		}
 		else {
 			this.tagSearchResult.clear();
@@ -151,6 +155,16 @@ public class AddressbookController {
 	public List<AddressbookItem> getItems()
 	{
 		return searchResult;
+	}
+
+	public void fireTagsSearchStyleIsAND() {
+		search.setTagSearchStyle(AddressbookSearch.TAG_SEARCH_STYLE_AND);
+		doSearch();
+	}
+
+	public void fireTagsSearchStyleIsOR() {
+		search.setTagSearchStyle(AddressbookSearch.TAG_SEARCH_STYLE_OR);
+		doSearch();
 	}
 
 }

@@ -316,4 +316,26 @@ public class AddressbookControllerTest extends TestCase{
 		assertTrue(view.tags.contains("sukulainen"));
 		assertFalse(view.tags.contains("työ"));
 	}
+	
+	@Test
+	public void test_tagSearchUsingAND() {
+		controller.fireTagsSearchStyleIsAND();
+		
+		controller.fireSelectedTagsChanged(new String[]{"työ", "sukulainen"});
+		
+		assertFalse(view.itemsList.contains(JORMA));
+		assertFalse(view.itemsList.contains(PETTERI));
+
+	}
+	
+	@Test
+	public void test_tagSearchUsingOR() {
+		controller.fireTagsSearchStyleIsOR();
+		
+		controller.fireSelectedTagsChanged(new String[]{"työ", "sukulainen"});
+		
+		assertTrue(view.itemsList.contains(JORMA));
+		assertTrue(view.itemsList.contains(PETTERI));
+
+	}
 }

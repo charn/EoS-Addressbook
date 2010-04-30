@@ -7,17 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -54,19 +54,17 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 	
 	private JTextField searchField;
 
-	private AddressbookController controller;
+	private final AddressbookController controller;
 	
 	private JPanel tagPanel;
 
-	private HashSet<String> selectedTags;
 	private TreeMap<String, JCheckBox> checkboxes;
 	
-	public GUI(AddressbookController controller) {
+	public GUI(AddressbookController controlleri) {
 
-		selectedTags = new HashSet<String>();
 		checkboxes = new TreeMap<String, JCheckBox>();
 		
-		this.controller = controller;
+		this.controller = controlleri;
 
 		setTitle("Addressbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,11 +95,39 @@ public class GUI extends JFrame implements AddressbookView, ActionListener {
 		//Lisätään tägeille oma paneeli
 		this.tagPanel = new JPanel(new GridLayout(0, 1));
 		JScrollPane tagJScrollPane = new JScrollPane(tagPanel);
+		
+		// *** Tag search radiobutton ***
+		JPanel andOrPanel = new JPanel();
+		JRadioButton andButton = new JRadioButton("AND");
+		andButton.setSelected(true);
+		JRadioButton orButton = new JRadioButton("OR");
 
+		andButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				controller.fireTagsSearchStyleIsAND();
+			}
+		});
+		
+		orButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				controller.fireTagsSearchStyleIsOR();
+			}
+		});
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(andButton);
+		bg.add(orButton);
+		
+		andOrPanel.add(new JLabel("Tag search:"));
+		andOrPanel.add(andButton);
+		andOrPanel.add(orButton);
+		// *** /Tag search radiobutton ***
+		
 		JPanel rightside = new JPanel(new BorderLayout());
 
 		rightside.add(new JLabel("Tags:"),BorderLayout.PAGE_START);
 		rightside.add(tagJScrollPane,BorderLayout.CENTER);
+		rightside.add(andOrPanel, BorderLayout.PAGE_END);
 		
 		// Sisältöpaneeliin skrollattava ruutu, johon yhteystietotaulu
 		JScrollPane leftside = new JScrollPane(initContactInfoTable());

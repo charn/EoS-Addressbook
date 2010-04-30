@@ -9,6 +9,15 @@ public class AddressbookSearch {
 	// Pilkut ja välilyönnit erottimina
 	private static final Pattern STRINGSPLITPATTERN = Pattern.compile("[,\\s]+");
 	
+	public static final int TAG_SEARCH_STYLE_AND = 1;
+	public static final int TAG_SEARCH_STYLE_OR = 2;
+	
+	private int tagSearchStyle;
+	
+	public AddressbookSearch(int defaultTagSearchStyle) {
+		this.setTagSearchStyle(defaultTagSearchStyle);
+	}
+	
 	/**
 	 * Etsii annetusta listasta hakuehtoja vastaavat alkiot.
 	 * @param items Lista josta etsitään hakuehtoja vastaavia alkioita.
@@ -28,11 +37,38 @@ public class AddressbookSearch {
 		return searchResult;
 	}
 	
-	public static List<AddressbookItem> searchWithTags(List<AddressbookItem> items, String[] tags) {
+	public void setTagSearchStyle(int style) {
+		if (style == TAG_SEARCH_STYLE_AND || style == TAG_SEARCH_STYLE_OR) {
+			this.tagSearchStyle = style;
+		}
+		else
+			throw new IllegalArgumentException("Search style doesn't exist.");
+	}
+	
+	public List<AddressbookItem> searchWithTags(List<AddressbookItem> items, String[] tags) {
+		if (this.tagSearchStyle == TAG_SEARCH_STYLE_AND)
+			return searchWithTagsAND(items, tags);
+		else
+			return searchWithTagsOR(items, tags);
+			
+	}
+	
+	private static List<AddressbookItem> searchWithTagsAND(List<AddressbookItem> items, String[] tags) {
 		List<AddressbookItem> tagSearchResult = new LinkedList<AddressbookItem>();
 		
 		for (AddressbookItem item : items) {
-			if(matchesTags(item, tags)) {
+			if(matchesAllTags(item, tags)) {
+				tagSearchResult.add(item);
+			}
+		}
+		return tagSearchResult;
+	}
+	
+	private static List<AddressbookItem> searchWithTagsOR(List<AddressbookItem> items, String[] tags) {
+		List<AddressbookItem> tagSearchResult = new LinkedList<AddressbookItem>();
+		
+		for (AddressbookItem item : items) {
+			if(matchesAnyTag(item, tags)) {
 				tagSearchResult.add(item);
 			}
 		}
@@ -66,7 +102,7 @@ public class AddressbookSearch {
 		return true;
 	}
 	
-	private static boolean matchesTags(AddressbookItem item, String[] tags) {
+	private static boolean matchesAllTags(AddressbookItem item, String[] tags) {
 		String[] needles = stringArrayToLowerCase(tags);
 		
 		String[] haystack = splitStringWithPattern(item.getTags());
@@ -78,6 +114,20 @@ public class AddressbookSearch {
 			}
 		}
 		return true;
+	}
+	
+	private static boolean matchesAnyTag(AddressbookItem item, String[] tags) {
+		String[] needles = stringArrayToLowerCase(tags);
+		
+		String[] haystack = splitStringWithPattern(item.getTags());
+		haystack = stringArrayToLowerCase(haystack);
+		
+		for (String needle : needles) {
+			if (equals(haystack,needle) == true) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private static String[] stringArrayToLowerCase(String[] array) {
