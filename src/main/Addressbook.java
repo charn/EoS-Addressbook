@@ -20,6 +20,20 @@ public class Addressbook {
 
 	public static void main(String[] args) {
 
+		// Luodaan data -kansio tarvittaessa.
+		File dirs = new File("data/img");
+		boolean dirsCreated = dirs.mkdirs();
+
+		// Jos kansiot on luotu jo aiemmin.
+		if(dirs.exists()) {
+			dirsCreated = true;
+		}
+		
+		if(!dirsCreated) {
+			System.err.println("Tarvittavien hakemistojen luominen ei onnistu.");
+			System.exit(0);	
+		}
+		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				
