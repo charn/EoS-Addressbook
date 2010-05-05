@@ -9,6 +9,9 @@ public class AddressbookSaver {
 
 	public static void saveAddressbookItemListToFile(List<AddressbookItem> itemList, String fileName){
 	    
+		// Luodaan data -kansio tarvittaessa.
+		new File("data").mkdir();
+		
 		//serialize the list
 		try {
 			OutputStream file = new FileOutputStream( fileName );
