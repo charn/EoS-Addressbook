@@ -1,7 +1,7 @@
 EoS-Addressbook
 ===============
 
-Kurssi: Ohjelmistoprosessit ja ohjelmistojen laatu - Kevät 2010
+Kurssi: [Ohjelmistoprosessit ja ohjelmistojen laatu - Kevät 2010](http://www.cs.helsinki.fi/u/taina/opol/k-2010/)
 
 Kansiot
 -------
