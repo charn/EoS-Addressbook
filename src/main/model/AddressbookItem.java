@@ -2,10 +2,10 @@ package main.model;
 
 import java.io.Serializable;
 
-public class AddressbookItem implements Serializable{
+public class AddressbookItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String firstname;
 	private String lastname;
 	private String nickname;
@@ -13,15 +13,10 @@ public class AddressbookItem implements Serializable{
 	private String phonenumber;
 	private String address;
 	private String tags;
-	
-	public AddressbookItem(	 
-							String firstname, 
-							String lastname,
-							String nickname,
-							String email,
-							String phonenumber,
-							String address,
-							String tags){
+	private String imageURL;
+
+	public AddressbookItem(String firstname, String lastname, String nickname,
+			String email, String phonenumber, String address, String tags) {
 
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -31,70 +26,85 @@ public class AddressbookItem implements Serializable{
 		this.address = address;
 		this.tags = tags;
 	}
-	
+
 	public AddressbookItem() {
-		this("","","","","","","");
+		this("", "", "", "", "", "", "");
 	}
-	
-	public String getFirstName(){
+
+	public String getFirstName() {
 		return this.firstname;
 	}
-	
-	public String getLastName(){
+
+	public String getLastName() {
 		return this.lastname;
 	}
-	
-	public String getNickname(){
+
+	public String getNickname() {
 		return this.nickname;
 	}
-	
-	public String getEmail(){
+
+	public String getEmail() {
 		return this.email;
 	}
-	
-	public String getPhoneNumber(){
+
+	public String getPhoneNumber() {
 		return this.phonenumber;
 	}
-	
-	public String getAddress(){
+
+	public String getAddress() {
 		return this.address;
 	}
-	
-	public String getTags(){
+
+	public String getTags() {
 		return this.tags;
 	}
 
+	public String getImageURL() {
+		return this.imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
 	public AddressbookItem withFirstName(String firstname) {
-		return new AddressbookItem(firstname,lastname, nickname,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withLastName(String lastname) {
-		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withNickname(String nickname) {
-		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withEmail(String email) {
-		return new AddressbookItem(firstname,lastname, nickname, email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withPhoneNumber(String phonenumber) {
-		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withAddress(String address) {
-		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
+
 	public AddressbookItem withTags(String tags) {
-		return new AddressbookItem(firstname,lastname, nickname ,email,phonenumber,address,tags);
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags);
 	}
-	
-	public String toString(){
-		return firstname + ", " + lastname + ", " + nickname + ", " + email + ", " + 
-		phonenumber + ", " + address + ", " + tags;
+
+	public String toString() {
+		return firstname + ", " + lastname + ", " + nickname + ", " + email
+				+ ", " + phonenumber + ", " + address + ", " + tags;
 	}
-	
+
 }
