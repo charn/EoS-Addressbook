@@ -1,0 +1,26 @@
+[EMMA v2.0.5312 EclEmma Fix 1 report, generated Sun May 09 01:12:31 EEST 2010]
+-------------------------------------------------------------------------------
+OVERALL COVERAGE SUMMARY:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+52%  (17/33)!	68%  (141/207)!	57%  (2810/4931)!	58%  (627,1/1090)!	all classes
+
+OVERALL STATS SUMMARY:
+
+total packages:	7
+total classes:	33
+total methods:	207
+total executable files:	25
+total executable lines:	1090
+
+COVERAGE BREAKDOWN BY PACKAGE:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+0%   (0/14)!	0%   (0/52)!	0%   (0/1580)!	0%   (0/336)!	main.view
+50%  (1/2)!	40%  (2/5)!	18%  (14/76)!	12%  (3/24)!	main
+67%  (2/3)!	76%  (22/29)	45%  (329/737)!	51%  (92,2/180)!	main.controller
+100% (6/6)	93%  (27/29)	93%  (726/781)	94%  (180,9/193)	test
+100% (4/4)	96%  (51/53)	98%  (699/713)	97%  (141/146)	main.model
+100% (3/3)	100% (34/34)	100% (946/948)	99%  (187/188)	test.controller
+100% (1/1)	100% (5/5)	100% (96/96)	100% (23/23)	test.model
+-------------------------------------------------------------------------------
