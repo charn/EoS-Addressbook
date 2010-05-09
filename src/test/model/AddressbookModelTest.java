@@ -1,4 +1,4 @@
-package test;
+package test.model;
 
 
 import java.util.LinkedList;
@@ -12,6 +12,8 @@ import main.model.AddressbookItem;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import test.TestDummies;
 
 public class AddressbookModelTest extends TestCase{
 

@@ -129,7 +129,8 @@ class AddDialog extends JDialog implements ActionListener,
 						emailTextField.getText(),
 						phoneNumberTextField.getText(),
 						addressTextField.getText(),
-						"")); // tags
+						"", // tags
+						"")); // imageURL 
 				
 				clearAndHide();
 

@@ -188,6 +188,19 @@ public class AddressbookControllerTest extends TestCase{
 	}
 	
 	@Test
+	public void test_addImageToItem() {
+		
+		String newValue = "duuni.png";
+		int editedItemRow = 0;
+		
+		controller.addImageToItem(editedItemRow, newValue);
+
+		assertEquals(view.itemsList.get(editedItemRow).getImageURL(), newValue);
+		assertEquals(view.numberOfUpdates, 2);
+
+	}
+	
+	@Test
 	public void test_viewAndModelAreInSyncAfterEditingFields() {
 		int editedItemRow = 0;
 		String newValue = "AsDf12345";

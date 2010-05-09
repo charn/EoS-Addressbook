@@ -103,7 +103,7 @@ public class CSVFileHandler
 							break;
 					}
 				}//for
-				AddressbookItem ai = new AddressbookItem(firstname,lastname,nickname,email,phonenumber,address,tags);
+				AddressbookItem ai = new AddressbookItem(firstname,lastname,nickname,email,phonenumber,address,tags, "");
 				controller.addItem(ai);
 			}//while
 			

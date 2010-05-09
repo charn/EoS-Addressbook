@@ -16,7 +16,8 @@ public class AddressbookItem implements Serializable {
 	private String imageURL;
 
 	public AddressbookItem(String firstname, String lastname, String nickname,
-			String email, String phonenumber, String address, String tags) {
+			String email, String phonenumber, String address, String tags,
+			String imageURL) {
 
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -25,10 +26,11 @@ public class AddressbookItem implements Serializable {
 		this.phonenumber = phonenumber;
 		this.address = address;
 		this.tags = tags;
+		this.imageURL = imageURL;
 	}
 
 	public AddressbookItem() {
-		this("", "", "", "", "", "", "");
+		this("", "", "", "", "", "", "", "");
 	}
 
 	public String getFirstName() {
@@ -63,43 +65,44 @@ public class AddressbookItem implements Serializable {
 		return this.imageURL;
 	}
 
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
-
 	public AddressbookItem withFirstName(String firstname) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withLastName(String lastname) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withNickname(String nickname) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withEmail(String email) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withPhoneNumber(String phonenumber) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withAddress(String address) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
 	}
 
 	public AddressbookItem withTags(String tags) {
 		return new AddressbookItem(firstname, lastname, nickname, email,
-				phonenumber, address, tags);
+				phonenumber, address, tags, imageURL);
+	}
+	
+	public AddressbookItem withImageURL(String imageURL) {
+		return new AddressbookItem(firstname, lastname, nickname, email,
+				phonenumber, address, tags, imageURL);	
 	}
 
 	public String toString() {

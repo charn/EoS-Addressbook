@@ -1,4 +1,4 @@
-package test;
+package test.model;
 
 import junit.framework.TestCase;
 
@@ -30,6 +30,7 @@ public class AddressbookItemTest extends TestCase{
 		assertEquals(item.getPhoneNumber(), "");
 		assertEquals(item.getAddress(), "");
 		assertEquals(item.getTags(), "");
+		assertEquals(item.getImageURL(), "");
 	}
 	
 	@Test
@@ -69,6 +70,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// Lastname
 		seppo = ESA.withLastName("Seppola");
@@ -81,6 +83,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// Nickname
 		seppo = ESA.withNickname("Sepi");
@@ -92,6 +95,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// Email
 		seppo = ESA.withEmail("asdf@asdf.fi");
@@ -104,6 +108,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// PhoneNumber
 		seppo = ESA.withPhoneNumber("12345");
@@ -116,6 +121,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getAddress().equals(ESA.getAddress()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// Address
 		seppo = ESA.withAddress("Katu 123");
@@ -128,11 +134,24 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
 		
 		// Tags
-		seppo = ESA.withTags("työ");
+		seppo = ESA.withTags("joku_uusi_tag");
 		
-		assertEquals(seppo.getTags(), "työ");
+		assertEquals(seppo.getTags(), "joku_uusi_tag");
+		
+		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
+		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
+		assertTrue(seppo.getNickname().equals(ESA.getNickname()));
+		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
+		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
+		assertTrue(seppo.getImageURL().equals(ESA.getImageURL()));
+
+		// imageURL
+		seppo = ESA.withImageURL("uuden_kuvan_uusi_osoite.png");
+		
+		assertEquals(seppo.getImageURL(), "uuden_kuvan_uusi_osoite.png");
 		
 		assertTrue(seppo.getFirstName().equals(ESA.getFirstName()));
 		assertTrue(seppo.getLastName().equals(ESA.getLastName()));
@@ -140,6 +159,7 @@ public class AddressbookItemTest extends TestCase{
 		assertTrue(seppo.getEmail().equals(ESA.getEmail()));
 		assertTrue(seppo.getPhoneNumber().equals(ESA.getPhoneNumber()));
 		assertTrue(seppo.getTags().equals(ESA.getTags()));
+
 	}
 	
 	@Test

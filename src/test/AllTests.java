@@ -1,5 +1,7 @@
 package test;
 
+import test.model.AddressbookItemTest;
+import test.model.ModelTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -13,7 +15,7 @@ public class AllTests {
 		suite.addTestSuite(ModelTest.class);
 		suite.addTestSuite(test.controller.AddressbookControllerTest.class);
 		suite.addTestSuite(test.controller.AddressbookSaverTest.class);
-		suite.addTestSuite(test.AddressbookModelTest.class);
+		suite.addTestSuite(test.model.AddressbookModelTest.class);
 
 		//$JUnit-END$
 		return suite;

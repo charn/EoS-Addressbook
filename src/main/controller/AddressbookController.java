@@ -139,11 +139,15 @@ public class AddressbookController {
 	}
 
 	public void addImageToItem(int row, String imageName) {
-		AddressbookItem item = this.tagSearchResult.get(row);
-		item.setImageURL(imageName);
-		model.updateItem(item, item);
+		AddressbookItem existing = this.tagSearchResult.get(row);
+		AddressbookItem updated = existing.withImageURL(imageName);
+		updateItem(existing, updated);
 	}
 
+//	public void fireImageURLChanged(AddressbookItem contact, String newValue) {
+//		updateItem(contact, contact.withImageURL(newValue));
+//	}
+	
 	private void updateItem(AddressbookItem existing, AddressbookItem updated) {
 		model.updateItem(existing, updated);
 		searchResult.set(searchResult.indexOf(existing), updated);
@@ -158,7 +162,7 @@ public class AddressbookController {
 	}
 
 	public List<AddressbookItem> getItems() {
-		return searchResult;
+		return tagSearchResult;
 	}
 
 	public void fireTagsSearchStyleIsAND() {
