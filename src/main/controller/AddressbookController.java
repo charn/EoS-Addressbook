@@ -139,7 +139,7 @@ public class AddressbookController {
 	}
 
 	public void addImageToItem(int row, String imageName) {
-		AddressbookItem item = this.searchResult.get(row);
+		AddressbookItem item = this.tagSearchResult.get(row);
 		item.setImageURL(imageName);
 		model.updateItem(item, item);
 	}
